@@ -1,9 +1,181 @@
-<html>
-  <head>
-    <title>Siraj Khalid - Portfolio</title>
-  </head>
-  <body>
-    <h1>Welcome to my artwork portfolio</h1>
-    <p>More coming soon...</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Siraj Khalid — Portfolio</title>
+  <meta name="description" content="Artwork by Siraj Khalid" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0b0b;          /* deep black */
+      --fg:#eaeaea;          /* light text */
+      --muted:#9b9b9b;
+      --accent:#eaeaea;      /* keep it monochrome */
+      --tile-gap: 14px;
+      --maxw: 1400px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--fg); font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+    }
+    /* Header */
+    .topbar{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(150%) blur(8px);
+      background:rgba(11,11,11,0.6); border-bottom:1px solid rgba(234,234,234,0.08);
+    }
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:14px 18px;}
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand .logo{width:22px; height:22px; display:inline-block; border:2px solid var(--fg); border-radius:4px; position:relative}
+    .brand .logo:after{content:""; position:absolute; left:50%; top:3px; width:2px; height:16px; background:var(--fg); transform:translateX(-50%) rotate(10deg);} /* minimalist sword */
+    .brand h1{font-size:18px; letter-spacing:0.06em; margin:0; font-weight:800}
+    .brand span{font-size:12px; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase}
+
+    /* Grid */
+    main{max-width:var(--maxw); margin:12px auto 60px; padding:0 18px}
+    .grid{column-count:1; column-gap:var(--tile-gap)}
+    @media (min-width:600px){ .grid{column-count:2} }
+    @media (min-width:900px){ .grid{column-count:3} }
+    @media (min-width:1200px){ .grid{column-count:4} }
+
+    .tile{break-inside:avoid; margin:0 0 var(--tile-gap); border-radius:14px; overflow:hidden; border:1px solid rgba(234,234,234,0.08); background:#111}
+    .tile button{display:block; padding:0; border:0; background:transparent; width:100%; cursor:zoom-in}
+    .tile img{display:block; width:100%; height:auto; object-fit:cover; filter:contrast(1.02); transition:transform .25s ease}
+    .tile:hover img{transform:scale(1.02)}
+    .cap{padding:10px 12px; font-size:13px; color:var(--muted);}
+
+    /* Lightbox */
+    .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.92); display:none; align-items:center; justify-content:center; z-index:100}
+    .lightbox.open{display:flex}
+    .lb-img{max-width:92vw; max-height:86vh; border-radius:16px; border:1px solid rgba(234,234,234,0.15)}
+    .lb-ui{position:fixed; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none}
+    .lb-btn{pointer-events:auto; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.18); color:var(--fg); backdrop-filter:blur(6px);
+      border-radius:999px; width:44px; height:44px; display:grid; place-items:center; margin:0 16px; cursor:pointer}
+    .lb-btn:hover{background:rgba(255,255,255,0.12)}
+    .lb-close{position:fixed; top:14px; right:14px}
+    .lb-cap{position:fixed; bottom:14px; left:50%; transform:translateX(-50%); color:var(--fg); font-size:14px; opacity:.85; text-align:center; padding:6px 10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.18); border-radius:10px}
+
+    /* Footer */
+    footer{max-width:var(--maxw); margin:40px auto; padding:0 18px; color:var(--muted); font-size:13px}
+    footer a{color:var(--fg); text-decoration:none; border-bottom:1px dotted rgba(234,234,234,0.3)}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>Siraj Khalid</h1>
+        <span>Artwork</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- images in items array below. -->
+    <div id="grid" class="grid" aria-live="polite"></div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© <span id="year"></span> Siraj Khalid. Contact: <a href="mailto:sirajkhalid10@gmail.com">sirajkhalid10@gmail.com</a> · <a href="https://www.artstation.com/taytayswiftt" target="_blank" rel="noreferrer noopener">ArtStation</a></p>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Artwork viewer">
+    <button class="lb-btn lb-close" title="Close (Esc)" aria-label="Close">✕</button>
+    <img id="lb-img" class="lb-img" alt="Artwork" />
+    <div class="lb-ui">
+      <button class="lb-btn" id="prev" title="Previous (←)" aria-label="Previous">⟨</button>
+      <button class="lb-btn" id="next" title="Next (→)" aria-label="Next">⟩</button>
+    </div>
+    <div id="lb-cap" class="lb-cap"></div>
+  </div>
+
+  <script>
+    // === 1) LIST IMAGES HERE ==========================================
+    // 
+    // Each item: { src: "file.jpg", w: optionalWidth, h: optionalHeight, title: "Caption" }
+    const items = [
+      { src: "images/euphoria-1.png", title: "Euphoria" },
+      { src: "images/euphoria-2.png", title: "Euphoria" },
+      { src: "images/sylvia.png", title: "Sylvia" },
+	  { src: "images/guard.png", title: "Undead Guard" },
+	  { src: "images/wingedhorror.png", title: "Winged Horror" },
+      
+    ];
+
+    // === 2) RENDER GRID =====================================================
+    const grid = document.getElementById('grid');
+    const frag = document.createDocumentFragment();
+
+    items.forEach((it, i) => {
+      const tile = document.createElement('figure');
+      tile.className = 'tile';
+      const btn = document.createElement('button');
+      btn.setAttribute('aria-label', `Open image ${i+1}`);
+
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.alt = it.title || `Artwork ${i+1}`;
+      img.src = it.src;
+
+      btn.appendChild(img);
+      btn.addEventListener('click', () => openLightbox(i));
+
+      const cap = document.createElement('figcaption');
+      cap.className = 'cap';
+      cap.textContent = it.title || '';
+
+      tile.appendChild(btn);
+      if (it.title) tile.appendChild(cap);
+      frag.appendChild(tile);
+    });
+
+    grid.appendChild(frag);
+
+    // === 3) LIGHTBOX ========================================================
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCap = document.getElementById('lb-cap');
+    const closeBtn = document.querySelector('.lb-close');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+
+    let index = 0;
+
+    function openLightbox(i){
+      index = i;
+      const it = items[index];
+      lbImg.src = it.src; lbImg.alt = it.title || 'Artwork';
+      lbCap.textContent = it.title || '';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
+    function prev(){ index = (index - 1 + items.length) % items.length; openLightbox(index); }
+    function next(){ index = (index + 1) % items.length; openLightbox(index); }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', () => { if(lb.classList.contains('open')) prev(); });
+    nextBtn.addEventListener('click', () => { if(lb.classList.contains('open')) next(); });
+
+    document.addEventListener('keydown', (e)=>{
+      if(!lb.classList.contains('open')) return;
+      if(e.key==='Escape') closeLightbox();
+      if(e.key==='ArrowLeft') prev();
+      if(e.key==='ArrowRight') next();
+    });
+
+    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
+
+    // === 4) UTIL ============================================================
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
