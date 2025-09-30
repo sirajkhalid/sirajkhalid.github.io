@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Siraj Khalid — Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ --bg:#0b0b0b; --fg:#eaeaea; --muted:#b9b9b9; --line:rgba(234,234,234,.12); --maxw:920px; }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;}
+    a{color:var(--fg);text-decoration:none;border-bottom:1px dotted rgba(234,234,234,.35)}
+    header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--line)}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:16px 18px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:22px;height:22px;border:2px solid var(--fg);border-radius:4px;position:relative}
+    .logo:after{content:\"\";position:absolute;left:50%;top:3px;width:2px;height:16px;background:var(--fg);transform:translateX(-50%) rotate(10deg)}
+    h1{font-size:20px;margin:0 0 2px 0;font-weight:800;letter-spacing:.04em}
+    .muted{color:var(--muted)}
+    .btn{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18)}
+    main{max-width:var(--maxw);margin:26px auto;padding:0 18px 40px}
+    h2{font-size:14px;text-transform:uppercase;letter-spacing:.14em;margin:32px 0 10px;color:#dcdcdc}
+    section{border-top:1px solid var(--line);padding-top:16px}
+    .job{margin:16px 0}
+    .job h3{margin:0 0 4px 0;font-size:16px}
+    .meta{font-size:13px;color:var(--muted)}
+    ul{margin:8px 0 0 18px}
+    li{margin:6px 0}
+    footer{max-width:var(--maxw);margin:10px auto 50px;padding:0 18px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Siraj Khalid</h1>
+          <div class="muted">Arlington, VA · <a href="tel:+17038538031">703-853-8031</a> · <a href="mailto:sirajkhalid@live.com">sirajkhalid@live.com</a></div>
+        </div>
+      </div>
+      <div>
+        <a class="btn" href="/" aria-label="Back to portfolio">← Portfolio</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Links</h2>
+      <div><a href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener">linkedin.com/in/sirajkhalid</a></div>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+
+      <article class="job">
+        <h3>Data Consultant — Accenture</h3>
+        <div class="meta">Arlington, VA · Nov 2022 – Nov 2023</div>
+        <ul>
+          <li>Analyzed & manipulated 1M+ rows using Python to produce actionable insights.</li>
+          <li>Cleansed 10k+ rows to client specs with Excel VBA (≈95% accuracy).</li>
+          <li>Automated SQL→VBA data entry, saving ~10 hours/week.</li>
+          <li>Built data transformations improving visibility & decision-making.</li>
+          <li>Produced Power BI visuals to communicate results to stakeholders.</li>
+          <li>Led cross-functional team shipping a Hybris web app that improved data access.</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <h3>Data Analyst — Accenture</h3>
+        <div class="meta">Arlington, VA · Mar 2019 – Nov 2022</div>
+        <ul>
+          <li>Drove Power BI what-if analyses that informed COVID-era sales strategies (≈15% revenue lift).</li>
+          <li>Automated daily tasks via VBA, freeing ~3 hours/day for analysis.</li>
+          <li>Resolved data issues in daily triage, cutting resolution time ≈10%.</li>
+          <li>Launched Salesforce feedback tool used by millions; +20% CSAT.</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <h3>IT Intern — Administrative Office of the U.S. Courts</h3>
+        <div class="meta">Washington, DC · Jan 2018 – May 2018</div>
+        <ul>
+          <li>Hardened access controls, contributing to ≈10% fewer security incidents.</li>
+          <li>Wrote PowerShell to automate Windows updates, saving ~10 hours/week.</li>
+          <li>Supported data collection, validation, reporting, and automation tasks.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="job">
+        <h3>George Mason University — B.S., Information Technology (GPA 3.4)</h3>
+        <div class="meta">Fairfax, VA · Aug 2016 – Dec 2018 · Concentration in Programming</div>
+      </div>
+      <div class="job">
+        <h3>George Mason University — B.A., Computer Game Design (in progress)</h3>
+        <div class="meta">Fairfax, VA · May 2023 – Present</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div>Power BI · Java · Python · SQL · Hybris · VBA · Excel</div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© <span id="year"></span> Siraj Khalid — <a href="/">Back to portfolio</a></div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
