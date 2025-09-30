@@ -12,15 +12,24 @@
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;}
     a{color:var(--fg);text-decoration:none;border-bottom:1px dotted rgba(234,234,234,.35)}
+
     header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--line)}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:16px 18px}
     .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:22px;height:22px;border:2px solid var(--fg);border-radius:4px;position:relative}
-    .logo:after{content:\"\";position:absolute;left:50%;top:3px;width:2px;height:16px;background:var(--fg);transform:translateX(-50%) rotate(10deg)}
+    .logo:after{content:"";position:absolute;left:50%;top:3px;width:2px;height:16px;background:var(--fg);transform:translateX(-50%) rotate(10deg)}
     h1{font-size:20px;margin:0 0 2px 0;font-weight:800;letter-spacing:.04em}
     .muted{color:var(--muted)}
-    .btn{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18)}
+
+    /* top-right nav */
+    .navlinks{display:flex;align-items:center;gap:10px}
+    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:var(--fg)}
+    .chip:hover{background:rgba(255,255,255,.12)}
+    .icon{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18)}
+    .icon:hover{background:rgba(255,255,255,.12)}
+    .icon svg{width:18px;height:18px;fill:var(--fg)}
+
     main{max-width:var(--maxw);margin:26px auto;padding:0 18px 40px}
     h2{font-size:14px;text-transform:uppercase;letter-spacing:.14em;margin:32px 0 10px;color:#dcdcdc}
     section{border-top:1px solid var(--line);padding-top:16px}
@@ -42,9 +51,17 @@
           <div class="muted">Arlington, VA · <a href="tel:+17038538031">703-853-8031</a> · <a href="mailto:sirajkhalid@live.com">sirajkhalid@live.com</a></div>
         </div>
       </div>
-      <div>
-        <a class="btn" href="/" aria-label="Back to portfolio">← Portfolio</a>
-      </div>
+
+      <nav class="navlinks" aria-label="Top links">
+        <a class="chip" href="/" aria-label="Back to portfolio">← Portfolio</a>
+        <a class="chip" href="/resume.pdf" download>Download PDF</a>
+        <a class="icon" href="https://www.artstation.com/taytayswiftt" target="_blank" rel="noopener" aria-label="ArtStation">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 14H4z"/></svg>
+        </a>
+        <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19H9.8V10.2h2.88v1.2h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2.0 3.6 4.6V19Z"/></svg>
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -61,7 +78,7 @@
         <h3>Data Consultant — Accenture</h3>
         <div class="meta">Arlington, VA · Nov 2022 – Nov 2023</div>
         <ul>
-          <li>Analyzed & manipulated 1M+ rows using Python to produce actionable insights.</li>
+          <li>Analyzed & manipulated 200,000 rows using Python to produce actionable insights.</li>
           <li>Cleansed 10k+ rows to client specs with Excel VBA (≈95% accuracy).</li>
           <li>Automated SQL→VBA data entry, saving ~10 hours/week.</li>
           <li>Built data transformations improving visibility & decision-making.</li>
@@ -70,18 +87,18 @@
         </ul>
       </article>
 
-      <article class="job">
+	  <article class="job">
         <h3>Data Analyst — Accenture</h3>
         <div class="meta">Arlington, VA · Mar 2019 – Nov 2022</div>
         <ul>
           <li>Drove Power BI what-if analyses that informed COVID-era sales strategies (≈15% revenue lift).</li>
           <li>Automated daily tasks via VBA, freeing ~3 hours/day for analysis.</li>
           <li>Resolved data issues in daily triage, cutting resolution time ≈10%.</li>
-          <li>Launched Salesforce feedback tool used by millions; +20% CSAT.</li>
+          <li>Launched Salesforce feedback tool used by thousands; +20% CSAT.</li>
         </ul>
       </article>
 
-      <article class="job">
+	  <article class="job">
         <h3>IT Intern — Administrative Office of the U.S. Courts</h3>
         <div class="meta">Washington, DC · Jan 2018 – May 2018</div>
         <ul>
@@ -90,23 +107,44 @@
           <li>Supported data collection, validation, reporting, and automation tasks.</li>
         </ul>
       </article>
+	  
+	  <article class="job">
+        <h3>Computer User Support Specialist — CPR Cell Phone Repair </h3>
+        <div class="meta">Springfield, VA · Sep 2014 – Jul 2016</div>
+        <ul>
+          <li>Resolved customer inquiries on hardware/software issues, achieving a 95% satisfaction rate.</li>
+          <li>Set up and configured computer systems, including OS installations and cabling, with a 90% first-time success rate.</li>
+          <li>Provided hands-on technical support to non-technical users, improving customer confidence and retention.</li>
+        </ul>
+      </article>
+	  
+	  <article class="job">
+        <h3>Aerospace Engineer — United States Air Force</h3>
+        <div class="meta">Barksdale AFB, LA · Jul 2011 – Jul 2014</div>
+        <ul>
+          <li>Performed inspections on $3M+ worth of aerospace equipment, ensuring 100% compliance with safety regulations.</li>
+          <li>Examined $2.5M in aircraft components (landing gear, hydraulics, structural systems), identifying and repairing critical safety hazards.</li>
+          <li>Maintained detailed repair and maintenance logs, ensuring regulatory compliance and accurate equipment tracking.</li>
+		  <li>Collaborated with engineering teams to implement preventive maintenance, reducing aircraft downtime and enhancing mission readiness.</li>
+        </ul>
+      </article>
     </section>
 
     <section>
       <h2>Education</h2>
       <div class="job">
+        <h3>George Mason University — B.F.A., Computer Game Design (in progress)</h3>
+        <div class="meta">Fairfax, VA · Aug 2024 – May 2026</div>
+      </div>
+	  <div class="job">
         <h3>George Mason University — B.S., Information Technology (GPA 3.4)</h3>
         <div class="meta">Fairfax, VA · Aug 2016 – Dec 2018 · Concentration in Programming</div>
-      </div>
-      <div class="job">
-        <h3>George Mason University — B.A., Computer Game Design (in progress)</h3>
-        <div class="meta">Fairfax, VA · May 2023 – Present</div>
       </div>
     </section>
 
     <section>
       <h2>Skills</h2>
-      <div>Power BI · Java · Python · SQL · Hybris · VBA · Excel</div>
+      <div>Power BI · Java · Python · SQL · Hybris · VBA · Excel · Unity · Unreal Engine</div>
     </section>
   </main>
 
