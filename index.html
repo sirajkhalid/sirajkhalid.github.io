@@ -124,39 +124,174 @@
     <div id="lb-cap" class="lb-cap"></div>
   </div>
 
-  <script>
-    const items = [
-      { src: "images/euphoria-1.png", title: "Euphoria" },
-      { src: "images/euphoria-2.png", title: "Euphoria" },
-      { src: "images/sylvia.png",     title: "Sylvia" },
-      { src: "images/guard.png",      title: "Undead Guard" },
-      { src: "images/wingedhorror.png", title: "Winged Horror" },
-    ];
+<script>
+  // --- CONFIG: Add artworks. For multi-step pieces, use `frames` (with optional `label`) and an optional `thumb` for the grid.
+  // Single image example:
+  // { src: "images/sylvia.png", title: "Sylvia" }
+  //
+  // Multi-step example (auto-advances Lineart -> WIP -> Final when opened):
+  // { title: "Winged Horror", thumb: "images/wingedhorror.png", frames: [
+  //   { src: "images/wingedhorror-line.png", label: "Lineart" },
+  //   { src: "images/wingedhorror-wip.png",  label: "In-progress" },
+  //   { src: "images/wingedhorror.png",     label: "Final" }
+  // ]}
+  const items = [
+    { src: "images/euphoria-1.png",    title: "Euphoria" },
+    { src: "images/euphoria-2.png",    title: "Euphoria" },
+    { src: "images/sylvia.png",        title: "Sylvia" },
+    { src: "images/guard.png",         title: "Undead Guard" },
+	{ src: "images/Logo-1.png",         title: "Stryker's Revenge Sketch" },
 
-    const grid = document.getElementById('grid');
-    const frag = document.createDocumentFragment();
+ //   { title: "Winged Horror", thumb: "images/wingedhorror.png", frames: [
+ //     { src: "images/wingedhorror-line.png", label: "Lineart" },
+ //     { src: "images/wingedhorror-wip.png",  label: "In-progress" },
+ //     { src: "images/wingedhorror.png",     label: "Final" }
+ //   ]},
+  ];
 
-    items.forEach((it, i) => {
-      const tile = document.createElement('figure'); tile.className='tile';
-      const btn = document.createElement('button'); btn.setAttribute('aria-label', `Open image ${i+1}`);
-      const img = document.createElement('img'); img.loading='lazy'; img.decoding='async'; img.alt=it.title||`Artwork ${i+1}`; img.src=it.src;
-      btn.appendChild(img); btn.addEventListener('click', ()=>openLightbox(i));
-      const cap = document.createElement('figcaption'); cap.className='cap'; cap.textContent = it.title || '';
-      tile.appendChild(btn); if(it.title) tile.appendChild(cap); frag.appendChild(tile);
-    });
-    grid.appendChild(frag);
+  // --- RENDER GRID ----------------------------------------------------------
+  const grid = document.getElementById('grid');
+  const frag = document.createDocumentFragment();
 
-    const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lb-img'), lbCap=document.getElementById('lb-cap');
-    const closeBtn=document.querySelector('.lb-close'), prevBtn=document.getElementById('prev'), nextBtn=document.getElementById('next');
-    let index=0;
-    function openLightbox(i){ index=i; const it=items[index]; lbImg.src=it.src; lbImg.alt=it.title||'Artwork'; lbCap.textContent=it.title||''; lb.classList.add('open'); document.body.style.overflow='hidden'; }
-    function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow=''; }
-    function prev(){ index=(index-1+items.length)%items.length; openLightbox(index); }
-    function next(){ index=(index+1)%items.length; openLightbox(index); }
-    closeBtn.addEventListener('click', closeLightbox);
-    document.addEventListener('keydown', (e)=>{ if(!lb.classList.contains('open')) return; if(e.key==='Escape') closeLightbox(); if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
-    lb.addEventListener('click',(e)=>{ if(e.target===lb) closeLightbox(); });
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  items.forEach((it, i) => {
+    const tile = document.createElement('figure');
+    tile.className = 'tile';
+    const btn = document.createElement('button');
+    btn.setAttribute('aria-label', `Open image ${i+1}`);
+
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.alt = it.title || `Artwork ${i+1}`;
+    // Use explicit thumb, else single src, else last frame as the grid thumbnail
+    const thumb = it.thumb || it.src || (it.frames ? it.frames[it.frames.length - 1].src : "");
+    img.src = thumb;
+
+    btn.appendChild(img);
+    btn.addEventListener('click', () => openLightbox(i));
+
+    const cap = document.createElement('figcaption');
+    cap.className = 'cap';
+    cap.textContent = it.title || '';
+
+    tile.appendChild(btn);
+    if (it.title) tile.appendChild(cap);
+    frag.appendChild(tile);
+  });
+  grid.appendChild(frag);
+
+  // --- LIGHTBOX WITH PROCESS STEPS -----------------------------------------
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-cap');
+  const closeBtn = document.querySelector('.lb-close');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+
+  let index = 0;         // which artwork
+  let frameIndex = 0;    // which step within that artwork (if any)
+  let slideshowTimer = null;
+  const FRAME_INTERVAL_MS = 1600; // auto-advance speed for process images
+
+  function showFrame() {
+    const it = items[index];
+    if (it.frames && it.frames.length) {
+      const f = it.frames[frameIndex];
+      lbImg.src = f.src;
+      lbImg.alt = it.title ? `${it.title} — ${f.label || `Step ${frameIndex+1}`}` : (f.label || 'Artwork step');
+      const steps = `${frameIndex + 1}/${it.frames.length}`;
+      lbCap.textContent = `${it.title || ''}${it.title ? ' — ' : ''}${steps}${f.label ? ' • ' + f.label : ''}`;
+    } else {
+      lbImg.src = it.src;
+      lbImg.alt = it.title || 'Artwork';
+      lbCap.textContent = it.title || '';
+    }
+  }
+
+  function startSlideshowIfAny() {
+    clearSlideshow();
+    const it = items[index];
+    if (it.frames && it.frames.length > 1) {
+      frameIndex = 0; // start from first (e.g., Lineart)
+      showFrame();
+      slideshowTimer = setInterval(() => {
+        frameIndex++;
+        if (frameIndex >= it.frames.length) {
+          // stop on final
+          frameIndex = it.frames.length - 1;
+          clearSlideshow();
+          return;
+        }
+        showFrame();
+      }, FRAME_INTERVAL_MS);
+    } else {
+      showFrame();
+    }
+  }
+
+  function clearSlideshow() {
+    if (slideshowTimer) {
+      clearInterval(slideshowTimer);
+      slideshowTimer = null;
+    }
+  }
+
+  function openLightbox(i) {
+    index = i;
+    frameIndex = 0;
+    startSlideshowIfAny();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    clearSlideshow();
+  }
+
+  function prevArtwork() {
+    clearSlideshow();
+    index = (index - 1 + items.length) % items.length;
+    frameIndex = 0;
+    startSlideshowIfAny();
+  }
+
+  function nextArtwork() {
+    clearSlideshow();
+    index = (index + 1) % items.length;
+    frameIndex = 0;
+    startSlideshowIfAny();
+  }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  prevBtn.addEventListener('click', () => { if (lb.classList.contains('open')) prevArtwork(); });
+  nextBtn.addEventListener('click', () => { if (lb.classList.contains('open')) nextArtwork(); });
+
+  // Click the image to advance within the same artwork's steps (if any)
+  lbImg.addEventListener('click', () => {
+    const it = items[index];
+    if (it.frames && it.frames.length > 1) {
+      clearSlideshow();
+      frameIndex = (frameIndex + 1) % it.frames.length;
+      showFrame();
+    }
+  });
+
+  // Keyboard: arrows change artworks (left/right), Esc closes.
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft')  prevArtwork();
+    if (e.key === 'ArrowRight') nextArtwork();
+  });
+
+  // Close if you click the dark backdrop
+  lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
