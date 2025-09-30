@@ -62,6 +62,24 @@
     .lb-cap{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);color:var(--fg);font-size:14px;opacity:.85;text-align:center;
       padding:6px 10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);border-radius:10px}
 
+    /* Lightbox description bubble */
+    .lb-desc{
+      position: fixed;
+      bottom: 56px;              /* sits above .lb-cap */
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--fg);
+      font-size: 13px;
+      opacity: .85;
+      text-align: center;
+      max-width: min(92vw, 1000px);
+      padding: 8px 12px;
+      white-space: pre-wrap;     /* keep \n line breaks */
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+    }
+
     /* Footer */
     footer{max-width:var(--maxw);margin:40px auto;padding:0 18px;color:var(--muted);font-size:13px}
     footer a{color:var(--fg);text-decoration:none;border-bottom:1px dotted rgba(234,234,234,0.3)}
@@ -122,70 +140,78 @@
       <button class="lb-btn" id="next" title="Next (→)" aria-label="Next">⟩</button>
     </div>
     <div id="lb-cap" class="lb-cap"></div>
+    <!-- NEW: description bubble -->
+    <div id="lb-desc" class="lb-desc" hidden></div>
   </div>
 
 <script>
   // --- CONFIG: Add artworks. For multi-step pieces, use `frames` (with optional `label`) and an optional `thumb` for the grid.
-  // Single image example:
-  // { src: "images/sylvia.png", title: "Sylvia" }
-  //
-  // Multi-step example (auto-advances Lineart -> WIP -> Final when opened):
-  // { title: "Winged Horror", thumb: "images/wingedhorror.png", frames: [
-  //   { src: "images/wingedhorror-line.png", label: "Lineart" },
-  //   { src: "images/wingedhorror-wip.png",  label: "In-progress" },
-  //   { src: "images/wingedhorror.png",     label: "Final" }
-  // ]}
+  // You can add descriptions:
+  // Single image: { src:"...", title:"...", desc:"Your description here" }
+  // Per-step: frames: [{ src:"...", label:"Lineart", desc:"Step notes" }, ...]
   const items = [
     { src: "images/euphoria-1.png",    title: "Euphoria" },
     { src: "images/euphoria-2.png",    title: "Euphoria" },
-	{ src: "images/sylvia-full.png",	title: "Sylvia" },
-	{ src: "images/Elf-wip.png",	title: "Elf" },
-	{ src: "images/Sylvia-Action.png",	title: "Sylvia" },
-	{ src: "images/Gracie1.png", title: "Gracie" },
-	{ src: "images/Gracie2.png", title: "Gracie" },
-	{ src: "images/kendall1.jpg", title: "Kendall" },
-	{ src: "images/bladerunner.jpg", title: "Blade Runner" },
-	{ src: "images/neon.png", title: "Lights" },
-	{ src: "images/hair.jpg", title: "Braid" },
-	{ src: "images/girl1.png", title: "Portrait" },
-	{ src: "images/dua1.png", title: "Dua" },
-	{ src: "images/CompanyLogo.png", title: "Logo" },
+    { src: "images/sylvia-full.png",   title: "Sylvia" },
+    { src: "images/Elf-wip.png",       title: "Elf" },
+    { src: "images/Sylvia-Action.png", title: "Sylvia" },
+    { src: "images/Gracie1.png",       title: "Gracie" },
+    { src: "images/Gracie2.png",       title: "Gracie" },
+    { src: "images/kendall1.jpg",      title: "Kendall" },
+    { src: "images/bladerunner.jpg",   title: "Blade Runner" },
+    { src: "images/neon.png",          title: "Lights" },
+    { src: "images/hair.jpg",          title: "Braid" },
+    { src: "images/girl1.png",         title: "Portrait" },
+    { src: "images/dua1.png",          title: "Dua" },
+    { src: "images/CompanyLogo.png",   title: "Logo", desc:"Created a logo for a fictional company for senior capstone project." },
 
-     { title: "Winged Horror", thumb: "images/wingedhorror.png", frames: [
-     { src: "images/wingedhorror-line.png", label: "Lineart" },
-     { src: "images/wingedhorror-wip.png",  label: "In-progress" },
-     { src: "images/wingedhorror.png",     label: "Final" }
-    ]},
-	
-	 { title: "Sylvia", thumb: "images/sylvia.png", frames: [
-     { src: "images/sylvia-line.png", label: "Lineart" },
-     { src: "images/sylvia-wip.png",  label: "In-progress" },
-     { src: "images/sylvia.png",     label: "Final" }
-    ]},
-	
-     { title: "Stryker's Revenge Logo", thumb: "images/Logo-4.png", frames: [
-     { src: "images/Logo-0.png", 	label: "Sketch" },
-     { src: "images/Logo-1.png",  	label: "Lettering" },
-     { src: "images/Logo-2.png",    label: "Skull" },
-	 { src: "images/Logo-3.png",    label: "Sword" },
-	 { src: "images/Logo-4.png",    label: "Final" }
-    ]},
-	
-	 { title: "Amelia", thumb: "images/Amelia.png", frames: [
-     { src: "images/Amelia-wip.png", label: "In-progess" },
-     { src: "images/Amelia.png",  label: "Final" }
-    ]},
-	
-	 { title: "Guard", thumb: "images/Guard1.jpg", frames: [
-     { src: "images/Guard-line.png", label: "Lineart" },
-     { src: "images/Guard-wip.png",  label: "In-progress" },
-	 { src: "images/Guard1.jpg",  label: "Final" }
-    ]},
-	
-     { title: "Stryker", thumb: "images/Stryker.png", frames: [
-     { src: "images/Stryker-line.png", label: "Lineart" },
-     { src: "images/Stryker.png",  label: "Final" }
-    ]},
+    { title: "Winged Horror", thumb: "images/wingedhorror.png", desc: "Creature created for senior capstone project",
+      frames: [
+        { src: "images/wingedhorror-line.png", label: "Lineart"        /*, desc: "Loose pen pass to lock silhouette and gesture." */},
+        { src: "images/wingedhorror-wip.png",  label: "In-progress"    /*, desc: "Flat colors + value grouping test." */},
+        { src: "images/wingedhorror.png",     label: "Final"           /*, desc: "Paintover, edges, and grading." */}
+      ]
+    },
+
+    { title: "Sylvia", thumb: "images/sylvia.png",
+      frames: [
+        { src: "images/sylvia-line.png", label: "Lineart" },
+        { src: "images/sylvia-wip.png",  label: "In-progress" },
+        { src: "images/sylvia.png",      label: "Final" }
+      ]
+    },
+
+    { title: "Stryker's Revenge Logo", thumb: "images/Logo-4.png",
+      frames: [
+        { src: "images/Logo-0.png", label: "Sketch" },
+        { src: "images/Logo-1.png", label: "Lettering" },
+        { src: "images/Logo-2.png", label: "Skull" },
+        { src: "images/Logo-3.png", label: "Sword" },
+        { src: "images/Logo-4.png", label: "Final" }
+      ]
+    },
+
+    { title: "Amelia", thumb: "images/Amelia.png",
+      frames: [
+        { src: "images/Amelia-wip.png", label: "In-progess" },
+        { src: "images/Amelia.png",     label: "Final" }
+      ]
+    },
+
+    { title: "Guard", thumb: "images/Guard1.jpg",
+      frames: [
+        { src: "images/Guard-line.png", label: "Lineart" },
+        { src: "images/Guard-wip.png",  label: "In-progress" },
+        { src: "images/Guard1.jpg",     label: "Final" }
+      ]
+    },
+
+    { title: "Stryker", thumb: "images/Stryker.png",
+      frames: [
+        { src: "images/Stryker-line.png", label: "Lineart" },
+        { src: "images/Stryker.png",      label: "Final" }
+      ]
+    },
   ];
 
   // --- RENDER GRID ----------------------------------------------------------
@@ -219,10 +245,11 @@
   });
   grid.appendChild(frag);
 
-  // --- LIGHTBOX WITH PROCESS STEPS -----------------------------------------
+  // --- LIGHTBOX WITH PROCESS STEPS + DESCRIPTIONS ---------------------------
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lb-img');
   const lbCap = document.getElementById('lb-cap');
+  const lbDesc = document.getElementById('lb-desc');
   const closeBtn = document.querySelector('.lb-close');
   const prevBtn = document.getElementById('prev');
   const nextBtn = document.getElementById('next');
@@ -234,16 +261,36 @@
 
   function showFrame() {
     const it = items[index];
+
+    let imgSrc = "";
+    let altText = "";
+    let stepsText = "";
+    let labelText = "";
+    let descText = "";
+
     if (it.frames && it.frames.length) {
       const f = it.frames[frameIndex];
-      lbImg.src = f.src;
-      lbImg.alt = it.title ? `${it.title} — ${f.label || `Step ${frameIndex+1}`}` : (f.label || 'Artwork step');
-      const steps = `${frameIndex + 1}/${it.frames.length}`;
-      lbCap.textContent = `${it.title || ''}${it.title ? ' — ' : ''}${steps}${f.label ? ' • ' + f.label : ''}`;
+      imgSrc = f.src;
+      altText = it.title ? `${it.title} — ${f.label || `Step ${frameIndex+1}`}` : (f.label || 'Artwork step');
+      stepsText = `${frameIndex + 1}/${it.frames.length}`;
+      labelText = f.label ? ` • ${f.label}` : "";
+      descText = f.desc || it.desc || "";
     } else {
-      lbImg.src = it.src;
-      lbImg.alt = it.title || 'Artwork';
-      lbCap.textContent = it.title || '';
+      imgSrc = it.src;
+      altText = it.title || 'Artwork';
+      descText = it.desc || "";
+    }
+
+    lbImg.src = imgSrc;
+    lbImg.alt = altText;
+    lbCap.textContent = `${it.title || ''}${it.title ? ' — ' : ''}${stepsText}${labelText}`;
+
+    if (descText) {
+      lbDesc.textContent = descText;
+      lbDesc.hidden = false;
+    } else {
+      lbDesc.textContent = "";
+      lbDesc.hidden = true;
     }
   }
 
@@ -287,6 +334,8 @@
     lb.classList.remove('open');
     document.body.style.overflow = '';
     clearSlideshow();
+    lbDesc.textContent = "";
+    lbDesc.hidden = true;
   }
 
   function prevArtwork() {
@@ -308,7 +357,8 @@
   nextBtn.addEventListener('click', () => { if (lb.classList.contains('open')) nextArtwork(); });
 
   // Click the image to advance within the same artwork's steps (if any)
-  lbImg.addEventListener('click', () => {
+  const lbImgEl = document.getElementById('lb-img');
+  lbImgEl.addEventListener('click', () => {
     const it = items[index];
     if (it.frames && it.frames.length > 1) {
       clearSlideshow();
