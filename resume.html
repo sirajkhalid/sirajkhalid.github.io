@@ -17,8 +17,11 @@
     .wrap{max-width:var(--maxw);margin:0 auto;padding:16px 18px}
     .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:22px;height:22px;border:2px solid var(--fg);border-radius:4px;position:relative}
-    .logo:after{content:"";position:absolute;left:50%;top:3px;width:2px;height:16px;background:var(--fg);transform:translateX(-50%) rotate(10deg)}
+
+    /* NEW: logo container (replaces the old bordered square) */
+    .logo{width:28px;height:28px;display:inline-grid;place-items:center}
+    .logo svg{display:block}
+
     h1{font-size:20px;margin:0 0 2px 0;font-weight:800;letter-spacing:.04em}
     .muted{color:var(--muted)}
 
@@ -45,7 +48,21 @@
   <header>
     <div class="wrap top">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <div class="logo" aria-hidden="true">
+          <!-- SK Blade Monogram -->
+          <svg viewBox="0 0 28 28" width="28" height="28" role="img" aria-label="Siraj’s Art logo">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- S stroke -->
+              <path d="M8 7c2.8-2 7.5-1 6 2c-1.4 3-7 2.5-7 6.2c0 3 5.2 3.6 9 .8" />
+              <!-- Sword / shared K stem -->
+              <path d="M14 4v20" />
+              <!-- Crossguard -->
+              <path d="M10 12h8" />
+              <!-- K arms -->
+              <path d="M14 12l7-6M14 12l7 6" />
+            </g>
+          </svg>
+        </div>
         <div>
           <h1>Siraj Khalid</h1>
           <div class="muted">Arlington, VA · <a href="tel:+17038538031">703-853-8031</a> · <a href="mailto:sirajkhalid@live.com">sirajkhalid@live.com</a></div>
@@ -59,7 +76,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 14H4z"/></svg>
         </a>
         <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19H9.8V10.2h2.88v1.2h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2.0 3.6 4.6V19Z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19Z"/></svg>
         </a>
       </nav>
     </div>
@@ -76,7 +93,7 @@
 
       <article class="job">
         <h3>Data Consultant — Accenture</h3>
-        <div class="meta">Arlington, VA · Nov 2022 – Nov 2023</div>
+        <div class="meta">Arlington, VA · Nov 2022 – Nov 2024</div>
         <ul>
           <li>Analyzed & manipulated 200,000 rows using Python to produce actionable insights.</li>
           <li>Cleansed 10k+ rows to client specs with Excel VBA (≈95% accuracy).</li>
@@ -87,7 +104,7 @@
         </ul>
       </article>
 
-	  <article class="job">
+      <article class="job">
         <h3>Data Analyst — Accenture</h3>
         <div class="meta">Arlington, VA · Mar 2019 – Nov 2022</div>
         <ul>
@@ -98,7 +115,7 @@
         </ul>
       </article>
 
-	  <article class="job">
+      <article class="job">
         <h3>IT Intern — Administrative Office of the U.S. Courts</h3>
         <div class="meta">Washington, DC · Jan 2018 – May 2018</div>
         <ul>
@@ -107,9 +124,9 @@
           <li>Supported data collection, validation, reporting, and automation tasks.</li>
         </ul>
       </article>
-	  
-	  <article class="job">
-        <h3>Computer User Support Specialist — CPR Cell Phone Repair </h3>
+
+      <article class="job">
+        <h3>Computer User Support Specialist — CPR Cell Phone Repair</h3>
         <div class="meta">Springfield, VA · Sep 2014 – Jul 2016</div>
         <ul>
           <li>Resolved customer inquiries on hardware/software issues, achieving a 95% satisfaction rate.</li>
@@ -117,15 +134,15 @@
           <li>Provided hands-on technical support to non-technical users, improving customer confidence and retention.</li>
         </ul>
       </article>
-	  
-	  <article class="job">
+
+      <article class="job">
         <h3>Aerospace Engineer — United States Air Force</h3>
         <div class="meta">Barksdale AFB, LA · Jul 2011 – Jul 2014</div>
         <ul>
           <li>Performed inspections on $3M+ worth of aerospace equipment, ensuring 100% compliance with safety regulations.</li>
           <li>Examined $2.5M in aircraft components (landing gear, hydraulics, structural systems), identifying and repairing critical safety hazards.</li>
           <li>Maintained detailed repair and maintenance logs, ensuring regulatory compliance and accurate equipment tracking.</li>
-		  <li>Collaborated with engineering teams to implement preventive maintenance, reducing aircraft downtime and enhancing mission readiness.</li>
+          <li>Collaborated with engineering teams to implement preventive maintenance, reducing aircraft downtime and enhancing mission readiness.</li>
         </ul>
       </article>
     </section>
@@ -136,7 +153,7 @@
         <h3>George Mason University — B.F.A., Computer Game Design (in progress)</h3>
         <div class="meta">Fairfax, VA · Aug 2024 – May 2026</div>
       </div>
-	  <div class="job">
+      <div class="job">
         <h3>George Mason University — B.S., Information Technology (GPA 3.4)</h3>
         <div class="meta">Fairfax, VA · Aug 2016 – Dec 2018 · Concentration in Programming</div>
       </div>

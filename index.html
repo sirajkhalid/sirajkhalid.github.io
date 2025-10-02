@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Siraj Khalid — Portfolio</title>
+  <title>Siraj’s Art — Portfolio</title>
   <meta name="description" content="Artwork by Siraj Khalid" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,8 +22,7 @@
       background:rgba(11,11,11,0.6);border-bottom:1px solid rgba(234,234,234,0.08);}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:14px 18px;}
     .brand{display:flex;align-items:center;gap:12px}
-    .brand .logo{width:22px;height:22px;display:inline-block;border:2px solid var(--fg);border-radius:4px;position:relative}
-    .brand .logo:after{content:"";position:absolute;left:50%;top:3px;width:2px;height:16px;background:var(--fg);transform:translateX(-50%) rotate(10deg);}
+    .brand .logo{width:28px;height:28px;display:inline-grid;place-items:center}
     .brand h1{font-size:18px;letter-spacing:0.06em;margin:0;font-weight:800}
     .brand span{font-size:12px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase}
 
@@ -65,7 +64,7 @@
     /* Lightbox description bubble */
     .lb-desc{
       position: fixed;
-      bottom: 56px;              /* sits above .lb-cap */
+      bottom: 56px;
       left: 50%;
       transform: translateX(-50%);
       color: var(--fg);
@@ -74,7 +73,7 @@
       text-align: center;
       max-width: min(92vw, 1000px);
       padding: 8px 12px;
-      white-space: pre-wrap;     /* keep \n line breaks */
+      white-space: pre-wrap;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.18);
       border-radius: 10px;
@@ -89,31 +88,40 @@
   <header class="topbar">
     <div class="wrap header-row">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <div class="logo" aria-hidden="true">
+          <!-- SK Blade Monogram -->
+          <svg viewBox="0 0 28 28" width="28" height="28" role="img" aria-label="Siraj’s Art logo">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- S stroke -->
+              <path d="M8 7c2.8-2 7.5-1 6 2c-1.4 3-7 2.5-7 6.2c0 3 5.2 3.6 9 .8" />
+              <!-- Sword / shared K stem -->
+              <path d="M14 4v20" />
+              <!-- Crossguard -->
+              <path d="M10 12h8" />
+              <!-- K arms -->
+              <path d="M14 12l7-6M14 12l7 6" />
+            </g>
+          </svg>
+        </div>
         <div>
-          <h1>Siraj Khalid</h1>
-          <span>Artwork</span>
+          <h1>Siraj’s Art</h1>
+          <span>by Siraj Khalid</span>
         </div>
       </div>
 
-<nav class="navlinks" aria-label="Primary">
-  <!-- Resume page -->
-  <a class="chip" href="/resume.html" rel="noopener">Resume</a>
+      <nav class="navlinks" aria-label="Primary">
+        <a class="chip" href="/resume.html" rel="noopener">Resume</a>
 
-  <!-- ArtStation -->
-  <a class="icon" href="https://www.artstation.com/taytayswiftt" target="_blank" rel="noopener noreferrer" aria-label="ArtStation">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 14H4z"/></svg>
-  </a>
+        <a class="icon" href="https://www.artstation.com/taytayswiftt" target="_blank" rel="noopener noreferrer" aria-label="ArtStation">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 14H4z"/></svg>
+        </a>
 
-  <!-- LinkedIn -->
-  <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19H9.8V10.2h2.88v1.2h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2.0 3.6 4.6V19Z"/>
-    </svg>
-  </a>
-</nav>
-
-
+        <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19H9.8V10.2h2.88v1.2h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2.0 3.6 4.6V19Z"/>
+          </svg>
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -140,253 +148,195 @@
       <button class="lb-btn" id="next" title="Next (→)" aria-label="Next">⟩</button>
     </div>
     <div id="lb-cap" class="lb-cap"></div>
-    <!-- NEW: description bubble -->
     <div id="lb-desc" class="lb-desc" hidden></div>
   </div>
 
-<script>
-  // --- CONFIG: Add artworks. For multi-step pieces, use `frames` (with optional `label`) and an optional `thumb` for the grid.
-  // You can add descriptions:
-  // Single image: { src:"...", title:"...", desc:"Your description here" }
-  // Per-step: frames: [{ src:"...", label:"Lineart", desc:"Step notes" }, ...]
-  const items = [
-    { src: "images/euphoria-1.png",    title: "Euphoria" },
-    { src: "images/euphoria-2.png",    title: "Euphoria" },
-    { src: "images/sylvia-full.png",   title: "Sylvia" },
-    { src: "images/Elf-wip.png",       title: "Elf" },
-    { src: "images/Gracie1.png",       title: "Gracie" },
-	{ src: "images/Sylvia-Action.png", title: "Sylvia" },   
-    { src: "images/Gracie2.png",       title: "Gracie" },
-    { src: "images/kendall1.jpg",      title: "Kendall" },
-    { src: "images/bladerunner.jpg",   title: "Blade Runner" },
-    { src: "images/neon.png",          title: "Lights" },
-    { src: "images/hair.jpg",          title: "Braid" },
-    { src: "images/girl1.png",         title: "Portrait" },
-    { src: "images/dua1.png",          title: "Dua" },
+  <script>
+    // --- CONFIG: artworks (single images + process sets). Use desc on item or frame for text in lightbox.
+    const items = [
+      { src: "images/euphoria-1.png",    title: "Euphoria" },
+      { src: "images/euphoria-2.png",    title: "Euphoria" },
+      { src: "images/sylvia-full.png",   title: "Sylvia" },
+      { src: "images/Elf-wip.png",       title: "Elf" },
+      { src: "images/Sylvia-Action.png", title: "Sylvia" },
+      { src: "images/Gracie1.png",       title: "Gracie" },
+      { src: "images/Gracie2.png",       title: "Gracie" },
+      { src: "images/kendall1.jpg",      title: "Kendall" },
+      { src: "images/bladerunner.jpg",   title: "Blade Runner" },
+      { src: "images/neon.png",          title: "Lights" },
+      { src: "images/hair.jpg",          title: "Braid" },
+      { src: "images/girl1.png",         title: "Portrait" },
+      { src: "images/dua1.png",          title: "Dua" },
 
-    { title: "Winged Horror", thumb: "images/wingedhorror.png", desc: "Creature created for senior capstone project",
-      frames: [
-        { src: "images/wingedhorror-line.png", label: "Lineart"        /*, desc: "Loose pen pass to lock silhouette and gesture." */},
-        { src: "images/wingedhorror-wip.png",  label: "In-progress"    /*, desc: "Flat colors + value grouping test." */},
-        { src: "images/wingedhorror.png",     label: "Final"           /*, desc: "Paintover, edges, and grading." */}
-      ]
-    },
+      { title: "Winged Horror", thumb: "images/wingedhorror.png", desc: "Creature created for senior capstone project",
+        frames: [
+          { src: "images/wingedhorror-line.png", label: "Lineart" },
+          { src: "images/wingedhorror-wip.png",  label: "In-progress" },
+          { src: "images/wingedhorror.png",      label: "Final" }
+        ]
+      },
 
-    { title: "Sylvia", thumb: "images/sylvia.png",
-      frames: [
-        { src: "images/sylvia-line.png", label: "Lineart" },
-        { src: "images/sylvia-wip.png",  label: "In-progress" },
-        { src: "images/sylvia.png",      label: "Final" }
-      ]
-    },
+      { title: "Sylvia", thumb: "images/sylvia.png",
+        frames: [
+          { src: "images/sylvia-line.png", label: "Lineart" },
+          { src: "images/sylvia-wip.png",  label: "In-progress" },
+          { src: "images/sylvia.png",      label: "Final" }
+        ]
+      },
 
-    { title: "Stryker's Revenge Logo", thumb: "images/Logo-4.png",
-      frames: [
-        { src: "images/Logo-0.png", label: "Sketch" },
-        { src: "images/Logo-1.png", label: "Lettering" },
-        { src: "images/Logo-2.png", label: "Skull" },
-        { src: "images/Logo-3.png", label: "Sword" },
-        { src: "images/Logo-4.png", label: "Final" }
-      ]
-    },
+      { title: "Stryker's Revenge Logo", thumb: "images/Logo-4.png",
+        frames: [
+          { src: "images/Logo-0.png", label: "Sketch" },
+          { src: "images/Logo-1.png", label: "Lettering" },
+          { src: "images/Logo-2.png", label: "Skull" },
+          { src: "images/Logo-3.png", label: "Sword" },
+          { src: "images/Logo-4.png", label: "Final" }
+        ]
+      },
 
-    { title: "Amelia", thumb: "images/Amelia.png",
-      frames: [
-        { src: "images/Amelia-wip.png", label: "In-progess" },
-        { src: "images/Amelia.png",     label: "Final" }
-      ]
-    },
+      { title: "Amelia", thumb: "images/Amelia.png",
+        frames: [
+          { src: "images/Amelia-wip.png", label: "In-progress" },
+          { src: "images/Amelia.png",     label: "Final" }
+        ]
+      },
 
-    { title: "Guard", thumb: "images/Guard1.jpg",
-      frames: [
-        { src: "images/Guard-line.png", label: "Lineart" },
-        { src: "images/Guard-wip.png",  label: "In-progress" },
-        { src: "images/Guard1.jpg",     label: "Final" }
-      ]
-    },
+      { title: "Guard", thumb: "images/Guard1.jpg",
+        frames: [
+          { src: "images/Guard-line.png", label: "Lineart" },
+          { src: "images/Guard-wip.png",  label: "In-progress" },
+          { src: "images/Guard1.jpg",     label: "Final" }
+        ]
+      },
 
-    { title: "Stryker", thumb: "images/Stryker.png",
-      frames: [
-        { src: "images/Stryker-line.png", label: "Lineart" },
-        { src: "images/Stryker.png",      label: "Final" }
-      ]
-    },
-	
-	 { title: "Fictional Company Logo", thumb: "images/CompanyLogo1.png",
-      frames: [
-        { src: "images/CompanyLogo1.png", label: "Company Logo" desc: "Logo I made for the fictional company my team created for my Senior Capstone course."},
-        { src: "images/CompanyLogo.png",  label: "Company Logo" }
-      ]
-    },
-  ];
+      { title: "Stryker", thumb: "images/Stryker.png",
+        frames: [
+          { src: "images/Stryker-line.png", label: "Lineart" },
+          { src: "images/Stryker.png",      label: "Final" }
+        ]
+      },
 
-  // --- RENDER GRID ----------------------------------------------------------
-  const grid = document.getElementById('grid');
-  const frag = document.createDocumentFragment();
+      { title: "Fictional Company Logo", thumb: "images/CompanyLogo1.png",
+        frames: [
+          { src: "images/CompanyLogo1.png", label: "Company Logo", desc: "Logo I made for the fictional company my team created for my Senior Capstone course." },
+          { src: "images/CompanyLogo.png",  label: "Company Logo" }
+        ]
+      },
+    ];
 
-  items.forEach((it, i) => {
-    const tile = document.createElement('figure');
-    tile.className = 'tile';
-    const btn = document.createElement('button');
-    btn.setAttribute('aria-label', `Open image ${i+1}`);
+    // --- RENDER GRID
+    const grid = document.getElementById('grid');
+    const frag = document.createDocumentFragment();
 
-    const img = document.createElement('img');
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.alt = it.title || `Artwork ${i+1}`;
-    // Use explicit thumb, else single src, else last frame as the grid thumbnail
-    const thumb = it.thumb || it.src || (it.frames ? it.frames[it.frames.length - 1].src : "");
-    img.src = thumb;
+    items.forEach((it, i) => {
+      const tile = document.createElement('figure');
+      tile.className = 'tile';
+      const btn = document.createElement('button');
+      btn.setAttribute('aria-label', `Open image ${i+1}`);
 
-    btn.appendChild(img);
-    btn.addEventListener('click', () => openLightbox(i));
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.alt = it.title || `Artwork ${i+1}`;
+      const thumb = it.thumb || it.src || (it.frames ? it.frames[it.frames.length - 1].src : "");
+      img.src = thumb;
 
-    const cap = document.createElement('figcaption');
-    cap.className = 'cap';
-    cap.textContent = it.title || '';
+      btn.appendChild(img);
+      btn.addEventListener('click', () => openLightbox(i));
 
-    tile.appendChild(btn);
-    if (it.title) tile.appendChild(cap);
-    frag.appendChild(tile);
-  });
-  grid.appendChild(frag);
+      const cap = document.createElement('figcaption');
+      cap.className = 'cap';
+      cap.textContent = it.title || '';
 
-  // --- LIGHTBOX WITH PROCESS STEPS + DESCRIPTIONS ---------------------------
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lb-img');
-  const lbCap = document.getElementById('lb-cap');
-  const lbDesc = document.getElementById('lb-desc');
-  const closeBtn = document.querySelector('.lb-close');
-  const prevBtn = document.getElementById('prev');
-  const nextBtn = document.getElementById('next');
+      tile.appendChild(btn);
+      if (it.title) tile.appendChild(cap);
+      frag.appendChild(tile);
+    });
+    grid.appendChild(frag);
 
-  let index = 0;         // which artwork
-  let frameIndex = 0;    // which step within that artwork (if any)
-  let slideshowTimer = null;
-  const FRAME_INTERVAL_MS = 1600; // auto-advance speed for process images
+    // --- LIGHTBOX WITH PROCESS STEPS + DESCRIPTIONS
+    const lb     = document.getElementById('lightbox');
+    const lbImg  = document.getElementById('lb-img');
+    const lbCap  = document.getElementById('lb-cap');
+    const lbDesc = document.getElementById('lb-desc');
+    const closeBtn = document.querySelector('.lb-close');
+    const prevBtn  = document.getElementById('prev');
+    const nextBtn  = document.getElementById('next');
 
-  function showFrame() {
-    const it = items[index];
+    let index = 0, frameIndex = 0, slideshowTimer = null;
+    const FRAME_INTERVAL_MS = 1600;
 
-    let imgSrc = "";
-    let altText = "";
-    let stepsText = "";
-    let labelText = "";
-    let descText = "";
+    function showFrame() {
+      const it = items[index];
+      let imgSrc = "", altText = "", stepsText = "", labelText = "", descText = "";
 
-    if (it.frames && it.frames.length) {
-      const f = it.frames[frameIndex];
-      imgSrc = f.src;
-      altText = it.title ? `${it.title} — ${f.label || `Step ${frameIndex+1}`}` : (f.label || 'Artwork step');
-      stepsText = `${frameIndex + 1}/${it.frames.length}`;
-      labelText = f.label ? ` • ${f.label}` : "";
-      descText = f.desc || it.desc || "";
-    } else {
-      imgSrc = it.src;
-      altText = it.title || 'Artwork';
-      descText = it.desc || "";
+      if (it.frames && it.frames.length) {
+        const f = it.frames[frameIndex];
+        imgSrc = f.src;
+        altText = it.title ? `${it.title} — ${f.label || `Step ${frameIndex+1}`}` : (f.label || 'Artwork step');
+        stepsText = `${frameIndex + 1}/${it.frames.length}`;
+        labelText = f.label ? ` • ${f.label}` : "";
+        descText = f.desc || it.desc || "";
+      } else {
+        imgSrc = it.src;
+        altText = it.title || 'Artwork';
+        descText = it.desc || "";
+      }
+
+      lbImg.src = imgSrc;
+      lbImg.alt = altText;
+      lbCap.textContent = `${it.title || ''}${it.title ? ' — ' : ''}${stepsText}${labelText}`;
+
+      if (descText) { lbDesc.textContent = descText; lbDesc.hidden = false; }
+      else { lbDesc.textContent = ""; lbDesc.hidden = true; }
     }
 
-    lbImg.src = imgSrc;
-    lbImg.alt = altText;
-    lbCap.textContent = `${it.title || ''}${it.title ? ' — ' : ''}${stepsText}${labelText}`;
-
-    if (descText) {
-      lbDesc.textContent = descText;
-      lbDesc.hidden = false;
-    } else {
-      lbDesc.textContent = "";
-      lbDesc.hidden = true;
-    }
-  }
-
-  function startSlideshowIfAny() {
-    clearSlideshow();
-    const it = items[index];
-    if (it.frames && it.frames.length > 1) {
-      frameIndex = 0; // start from first (e.g., Lineart)
-      showFrame();
-      slideshowTimer = setInterval(() => {
-        frameIndex++;
-        if (frameIndex >= it.frames.length) {
-          // stop on final
-          frameIndex = it.frames.length - 1;
-          clearSlideshow();
-          return;
-        }
-        showFrame();
-      }, FRAME_INTERVAL_MS);
-    } else {
-      showFrame();
-    }
-  }
-
-  function clearSlideshow() {
-    if (slideshowTimer) {
-      clearInterval(slideshowTimer);
-      slideshowTimer = null;
-    }
-  }
-
-  function openLightbox(i) {
-    index = i;
-    frameIndex = 0;
-    startSlideshowIfAny();
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
-    clearSlideshow();
-    lbDesc.textContent = "";
-    lbDesc.hidden = true;
-  }
-
-  function prevArtwork() {
-    clearSlideshow();
-    index = (index - 1 + items.length) % items.length;
-    frameIndex = 0;
-    startSlideshowIfAny();
-  }
-
-  function nextArtwork() {
-    clearSlideshow();
-    index = (index + 1) % items.length;
-    frameIndex = 0;
-    startSlideshowIfAny();
-  }
-
-  closeBtn.addEventListener('click', closeLightbox);
-  prevBtn.addEventListener('click', () => { if (lb.classList.contains('open')) prevArtwork(); });
-  nextBtn.addEventListener('click', () => { if (lb.classList.contains('open')) nextArtwork(); });
-
-  // Click the image to advance within the same artwork's steps (if any)
-  const lbImgEl = document.getElementById('lb-img');
-  lbImgEl.addEventListener('click', () => {
-    const it = items[index];
-    if (it.frames && it.frames.length > 1) {
+    function startSlideshowIfAny() {
       clearSlideshow();
-      frameIndex = (frameIndex + 1) % it.frames.length;
-      showFrame();
+      const it = items[index];
+      if (it.frames && it.frames.length > 1) {
+        frameIndex = 0;
+        showFrame();
+        slideshowTimer = setInterval(() => {
+          frameIndex++;
+          if (frameIndex >= it.frames.length) {
+            frameIndex = it.frames.length - 1;
+            clearSlideshow();
+            return;
+          }
+          showFrame();
+        }, FRAME_INTERVAL_MS);
+      } else {
+        showFrame();
+      }
     }
-  });
 
-  // Keyboard: arrows change artworks (left/right), Esc closes.
-  document.addEventListener('keydown', (e) => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft')  prevArtwork();
-    if (e.key === 'ArrowRight') nextArtwork();
-  });
+    function clearSlideshow(){ if (slideshowTimer){ clearInterval(slideshowTimer); slideshowTimer = null; } }
 
-  // Close if you click the dark backdrop
-  lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
+    function openLightbox(i){ index=i; frameIndex=0; startSlideshowIfAny(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow=''; clearSlideshow(); lbDesc.textContent=""; lbDesc.hidden=true; }
+    function prevArtwork(){ clearSlideshow(); index=(index-1+items.length)%items.length; frameIndex=0; startSlideshowIfAny(); }
+    function nextArtwork(){ clearSlideshow(); index=(index+1)%items.length; frameIndex=0; startSlideshowIfAny(); }
 
-  // Footer year
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', () => { if (lb.classList.contains('open')) prevArtwork(); });
+    nextBtn.addEventListener('click', () => { if (lb.classList.contains('open')) nextArtwork(); });
 
+    document.getElementById('lb-img').addEventListener('click', () => {
+      const it = items[index];
+      if (it.frames && it.frames.length > 1) { clearSlideshow(); frameIndex = (frameIndex + 1) % it.frames.length; showFrame(); }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft')  prevArtwork();
+      if (e.key === 'ArrowRight') nextArtwork();
+    });
+
+    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
