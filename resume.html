@@ -10,28 +10,19 @@
   <style>
     :root{ --bg:#0b0b0b; --fg:#eaeaea; --muted:#b9b9b9; --line:rgba(234,234,234,.12); --maxw:920px; }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;opacity:0;transition:opacity .35s ease}
+    body.ready{opacity:1}
     a{color:var(--fg);text-decoration:none;border-bottom:1px dotted rgba(234,234,234,.35)}
-
     header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--line)}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:16px 18px}
     .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-
-    /* NEW: logo container (replaces the old bordered square) */
-    .logo{width:28px;height:28px;display:inline-grid;place-items:center}
-    .logo svg{display:block}
-
-    h1{font-size:20px;margin:0 0 2px 0;font-weight:800;letter-spacing:.04em}
+    .brand{display:flex;align-items:flex-start;gap:12px}
+    h1{font-size:22px;margin:0;font-weight:800;letter-spacing:.02em}
+    .role{color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;display:block}
     .muted{color:var(--muted)}
-
-    /* top-right nav */
     .navlinks{display:flex;align-items:center;gap:10px}
-    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:var(--fg)}
-    .chip:hover{background:rgba(255,255,255,.12)}
-    .icon{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18)}
-    .icon:hover{background:rgba(255,255,255,.12)}
-    .icon svg{width:18px;height:18px;fill:var(--fg)}
+    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:var(--fg);transition:transform .15s ease, background .2s ease}
+    .chip:hover{background:rgba(255,255,255,.12); transform:translateY(-1px) scale(1.02)}
 
     main{max-width:var(--maxw);margin:26px auto;padding:0 18px 40px}
     h2{font-size:14px;text-transform:uppercase;letter-spacing:.14em;margin:32px 0 10px;color:#dcdcdc}
@@ -48,36 +39,17 @@
   <header>
     <div class="wrap top">
       <div class="brand">
-        <div class="logo" aria-hidden="true">
-          <!-- SK Blade Monogram -->
-          <svg viewBox="0 0 28 28" width="28" height="28" role="img" aria-label="Siraj’s Art logo">
-            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <!-- S stroke -->
-              <path d="M8 7c2.8-2 7.5-1 6 2c-1.4 3-7 2.5-7 6.2c0 3 5.2 3.6 9 .8" />
-              <!-- Sword / shared K stem -->
-              <path d="M14 4v20" />
-              <!-- Crossguard -->
-              <path d="M10 12h8" />
-              <!-- K arms -->
-              <path d="M14 12l7-6M14 12l7 6" />
-            </g>
-          </svg>
-        </div>
         <div>
           <h1>Siraj Khalid</h1>
+          <span class="role">Concept Artist</span>
           <div class="muted">Arlington, VA · <a href="tel:+17038538031">703-853-8031</a> · <a href="mailto:sirajkhalid@live.com">sirajkhalid@live.com</a></div>
         </div>
       </div>
-
       <nav class="navlinks" aria-label="Top links">
-        <a class="chip" href="/" aria-label="Back to portfolio">← Portfolio</a>
+        <a class="chip" href="/">← Home</a>
+        <a class="chip" href="/about.html">About</a>
+        <a class="chip" href="/contact.html">Contact</a>
         <a class="chip" href="/resume.pdf" download>Download PDF</a>
-        <a class="icon" href="https://www.artstation.com/taytayswiftt" target="_blank" rel="noopener" aria-label="ArtStation">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 14H4z"/></svg>
-        </a>
-        <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19Z"/></svg>
-        </a>
       </nav>
     </div>
   </header>
@@ -85,12 +57,11 @@
   <main>
     <section>
       <h2>Links</h2>
-      <div><a href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener">linkedin.com/in/sirajkhalid</a></div>
+      <div><a href="https://sirajkhalid.com" target="_blank" rel="noopener">sirajkhalid.com</a> · <a href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener">linkedin.com/in/sirajkhalid</a></div>
     </section>
 
     <section>
       <h2>Experience</h2>
-
       <article class="job">
         <h3>Data Consultant — Accenture</h3>
         <div class="meta">Arlington, VA · Nov 2022 – Nov 2024</div>
@@ -140,9 +111,9 @@
         <div class="meta">Barksdale AFB, LA · Jul 2011 – Jul 2014</div>
         <ul>
           <li>Performed inspections on $3M+ worth of aerospace equipment, ensuring 100% compliance with safety regulations.</li>
-          <li>Examined $2.5M in aircraft components (landing gear, hydraulics, structural systems), identifying and repairing critical safety hazards.</li>
-          <li>Maintained detailed repair and maintenance logs, ensuring regulatory compliance and accurate equipment tracking.</li>
-          <li>Collaborated with engineering teams to implement preventive maintenance, reducing aircraft downtime and enhancing mission readiness.</li>
+          <li>Identified and repaired critical safety hazards in aircraft components.</li>
+          <li>Maintained detailed repair and maintenance logs, ensuring regulatory compliance.</li>
+          <li>Collaborated on preventive maintenance, reducing downtime and enhancing readiness.</li>
         </ul>
       </article>
     </section>
@@ -161,16 +132,19 @@
 
     <section>
       <h2>Skills</h2>
-      <div>Power BI · Java · Python · SQL · Hybris · VBA · Excel · Unity · Unreal Engine</div>
+      <div>Concept Art · Character/Creature Design · Photoshop/Procreate · 3ds Max · Unity · Unreal Engine · Power BI · Python · SQL · Git/GitHub</div>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      <div>© <span id="year"></span> Siraj Khalid — <a href="/">Back to portfolio</a></div>
+      <div>© <span id="year"></span> Siraj Khalid — <a href="/">Back to Home</a></div>
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>document.body.classList.add('ready'));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

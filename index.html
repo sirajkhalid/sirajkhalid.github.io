@@ -3,56 +3,83 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Siraj’s Art — Portfolio</title>
-  <meta name="description" content="Artwork by Siraj Khalid" />
+  <title>Siraj Khalid — Concept Artist</title>
+  <meta name="description" content="Portfolio of concept artist Siraj Khalid: characters, portraits, creatures, and game work." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0b0b; --fg:#eaeaea; --muted:#9b9b9b; --accent:#eaeaea;
-      --tile-gap:14px; --maxw:1400px;
+      --bg:#0b0b0b; --fg:#eaeaea; --muted:#9b9b9b; --line:rgba(234,234,234,0.12);
+      --tile-gap:14px; --maxw:1400px; --accent:#eaeaea;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;}
+    body{
+      margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+      /* (3) Page fade-in */
+      opacity:0; transition:opacity .35s ease;
+    }
+    body.ready{opacity:1}
 
     /* Header */
     .topbar{position:sticky;top:0;z-index:50;backdrop-filter:saturate(150%) blur(8px);
-      background:rgba(11,11,11,0.6);border-bottom:1px solid rgba(234,234,234,0.08);}
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:14px 18px;}
+      background:rgba(11,11,11,0.6);border-bottom:1px solid var(--line)}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:12px 18px}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px}
-    .brand .logo{width:28px;height:28px;display:inline-grid;place-items:center}
-    .brand h1{font-size:18px;letter-spacing:0.06em;margin:0;font-weight:800}
-    .brand span{font-size:12px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase}
+    .brand h1{margin:0;font-weight:800;letter-spacing:.02em;font-size:22px}
+    .brand .role{display:block;color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
 
-    /* Header right-side nav */
-    .header-row{display:flex;align-items:center;justify-content:space-between}
-    .navlinks{display:flex;align-items:center;gap:10px;margin-left:auto}
+    /* Nav + (5) hover micro-pop */
+    nav.navlinks{display:flex;align-items:center;gap:10px}
+    .chip,.icon{transition:transform .15s ease, background .2s ease}
     .chip{display:inline-block;font-size:14px;padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--fg);
       background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18)}
-    .chip:hover{background:rgba(255,255,255,0.12)}
+    .chip:hover{background:rgba(255,255,255,0.12); transform:translateY(-1px) scale(1.02)}
     .icon{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;text-decoration:none;
       background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18)}
-    .icon:hover{background:rgba(255,255,255,0.12)}
+    .icon:hover{background:rgba(255,255,255,0.12); transform:translateY(-1px) scale(1.02)}
     .icon svg{width:18px;height:18px;fill:var(--fg)}
 
+    /* Filters row */
+    .filters{position:relative;max-width:var(--maxw);margin:12px auto 0;padding:0 18px 10px;display:flex;gap:8px;flex-wrap:wrap}
+    .filter-btn{border:1px solid var(--line);background:rgba(255,255,255,0.04);color:var(--fg);padding:8px 12px;border-radius:999px;cursor:pointer;font-size:13px}
+    .filter-btn[aria-pressed="true"]{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.25)}
+    .filter-underline{
+      /* (1) filter underline slide */
+      position:absolute;height:2px;background:var(--fg);opacity:.35;border-radius:2px;left:18px;bottom:2px;width:0;transition:left .25s ease,width .25s ease;
+    }
+    .filter-spacer{flex:1}
+
     /* Grid */
-    main{max-width:var(--maxw);margin:12px auto 60px;padding:0 18px}
+    main{max-width:var(--maxw);margin:8px auto 60px;padding:0 18px}
     .grid{column-count:1;column-gap:var(--tile-gap)}
     @media (min-width:600px){.grid{column-count:2}}
     @media (min-width:900px){.grid{column-count:3}}
     @media (min-width:1200px){.grid{column-count:4}}
-    .tile{break-inside:avoid;margin:0 0 var(--tile-gap);border-radius:14px;overflow:hidden;border:1px solid rgba(234,234,234,0.08);background:#111}
+
+    .tile{
+      break-inside:avoid;margin:0 0 var(--tile-gap);border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#111;
+      /* (2) scroll reveal base state */
+      opacity:0; transform:translateY(8px) scale(.99); transition:opacity .45s ease, transform .45s ease;
+    }
+    .tile.in-view{opacity:1; transform:translateY(0) scale(1)}
+    .tile.hidden{opacity:0;transform:scale(.98);pointer-events:none}
     .tile button{display:block;padding:0;border:0;background:transparent;width:100%;cursor:zoom-in}
     .tile img{display:block;width:100%;height:auto;object-fit:cover;filter:contrast(1.02);transition:transform .25s ease}
     .tile:hover img{transform:scale(1.02)}
-    .cap{padding:10px 12px;font-size:13px;color:var(--muted)}
+    .cap{padding:10px 12px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:10px}
 
     /* Lightbox */
     .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:100}
     .lightbox.open{display:flex}
-    .lb-img{max-width:92vw;max-height:86vh;border-radius:16px;border:1px solid rgba(234,234,234,0.15)}
+    .lb-img{
+      max-width:92vw;max-height:86vh;border-radius:16px;border:1px solid rgba(234,234,234,0.15);
+      /* (4) zoom on open */
+      transform:scale(.98); opacity:0; transition:transform .25s ease, opacity .25s ease;
+    }
+    .lightbox.open .lb-img{transform:scale(1); opacity:1}
     .lb-ui{position:fixed;inset:0;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
     .lb-btn{pointer-events:auto;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:var(--fg);backdrop-filter:blur(6px);
       border-radius:999px;width:44px;height:44px;display:grid;place-items:center;margin:0 16px;cursor:pointer}
@@ -60,24 +87,9 @@
     .lb-close{position:fixed;top:14px;right:14px}
     .lb-cap{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);color:var(--fg);font-size:14px;opacity:.85;text-align:center;
       padding:6px 10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);border-radius:10px}
-
-    /* Lightbox description bubble */
     .lb-desc{
-      position: fixed;
-      bottom: 56px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--fg);
-      font-size: 13px;
-      opacity: .85;
-      text-align: center;
-      max-width: min(92vw, 1000px);
-      padding: 8px 12px;
-      white-space: pre-wrap;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 10px;
-    }
+      position:fixed;bottom:56px;left:50%;transform:translateX(-50%);color:var(--fg);font-size:13px;opacity:.85;text-align:center;
+      max-width:min(92vw,1000px);padding:8px 12px;white-space:pre-wrap;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);border-radius:10px}
 
     /* Footer */
     footer{max-width:var(--maxw);margin:40px auto;padding:0 18px;color:var(--muted);font-size:13px}
@@ -88,40 +100,35 @@
   <header class="topbar">
     <div class="wrap header-row">
       <div class="brand">
-        <div class="logo" aria-hidden="true">
-          <!-- SK Blade Monogram -->
-          <svg viewBox="0 0 28 28" width="28" height="28" role="img" aria-label="Siraj’s Art logo">
-            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <!-- S stroke -->
-              <path d="M8 7c2.8-2 7.5-1 6 2c-1.4 3-7 2.5-7 6.2c0 3 5.2 3.6 9 .8" />
-              <!-- Sword / shared K stem -->
-              <path d="M14 4v20" />
-              <!-- Crossguard -->
-              <path d="M10 12h8" />
-              <!-- K arms -->
-              <path d="M14 12l7-6M14 12l7 6" />
-            </g>
-          </svg>
-        </div>
         <div>
-          <h1>Siraj’s Art</h1>
-          <span>Character Artist</span>
+          <h1>Siraj Khalid</h1>
+          <span class="role">Concept Artist</span>
         </div>
       </div>
 
       <nav class="navlinks" aria-label="Primary">
-        <a class="chip" href="/resume.html" rel="noopener">Resume</a>
-
+        <a class="chip" href="/" aria-current="page">Home</a>
+        <a class="chip" href="/about.html">About</a>
+        <a class="chip" href="/resume.html">Resume</a>
+        <a class="chip" href="/contact.html">Contact</a>
         <a class="icon" href="https://www.artstation.com/taytayswiftt" target="_blank" rel="noopener noreferrer" aria-label="ArtStation">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 14H4z"/></svg>
         </a>
-
         <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19H9.8V10.2h2.88v1.2h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2.0 3.6 4.6V19Z"/>
+            <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19Z"/>
           </svg>
         </a>
       </nav>
+    </div>
+
+    <!-- Inline filters -->
+    <div class="filters">
+      <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-btn" data-filter="game">Game Work</button>
+      <button class="filter-btn" data-filter="personal">Personal Work</button>
+      <span class="filter-spacer"></span>
+      <div class="filter-underline" id="filterUnderline"></div>
     </div>
   </header>
 
@@ -152,28 +159,32 @@
   </div>
 
   <script>
-    const items = [
-      { src: "images/euphoria-1.png",    title: "Euphoria" },
-      { src: "images/euphoria-2.png",    title: "Euphoria" },
-      { src: "images/Elf-wip.png",       title: "Elf" },
-      { src: "images/Sylvia-Action.png", title: "Sylvia" },
-      { src: "images/Gracie1.png",       title: "Gracie" },
-      { src: "images/Gracie2.png",       title: "Gracie" },
-      { src: "images/kendall1.jpg",      title: "Kendall" },
-      { src: "images/bladerunner.jpg",   title: "Blade Runner" },
-      { src: "images/neon.png",          title: "Lights" },
-      { src: "images/hair.jpg",          title: "Braid" },
-      { src: "images/girl1.png",         title: "Portrait" },
-      { src: "images/dua1.png",          title: "Dua" },
-	  { src: "images/KenBike.png",       title: "KenBike" },
-	  { src: "images/KenWhiteDress.png", title: "White Dress" },
-	  { src: "images/AnimeSky.png",      title: "Starry Night" },
-	  { src: "images/CaptainMarvel.png", title: "Captain Marvel" },
-	  
-	  { src: "images/Feral.png",		 title: "Feral", label: "Character art I did for my senior captstone project" },
-	  { src: "images/BloatedCorpse.png",	title: "Bloated Corpse", label: "Quick portrait I did for my senior captstone project" },
+    // === 0) Page ready fade-in
+    document.addEventListener('DOMContentLoaded', ()=>document.body.classList.add('ready'));
 
-      { title: "Winged Horror", thumb: "images/wingedhorror.png", desc: "Creature created for senior capstone project",
+    // === 1) ARTWORKS (tag your categories as you like)
+    const items = [
+      { src: "images/euphoria-1.png", title: "Euphoria", category: "personal" },
+      { src: "images/euphoria-2.png", title: "Euphoria", category: "personal" },
+      { src: "images/Elf-wip.png", title: "Elf", category: "game" },
+      { src: "images/Sylvia-Action.png", title: "Sylvia", category: "personal" },
+      { src: "images/Gracie1.png", title: "Gracie", category: "personal" },
+      { src: "images/Gracie2.png", title: "Gracie", category: "personal" },
+      { src: "images/kendall1.jpg", title: "Kendall", category: "personal" },
+      { src: "images/bladerunner.jpg", title: "Blade Runner", category: "personal" },
+      { src: "images/neon.png", title: "Lights", category: "personal" },
+      { src: "images/hair.jpg", title: "Braid", category: "personal" },
+      { src: "images/girl1.png", title: "Portrait", category: "personal" },
+      { src: "images/dua1.png", title: "Dua", category: "personal" },
+      { src: "images/KenBike.png", title: "KenBike", category: "personal" },
+      { src: "images/KenWhiteDress.png", title: "White Dress", category: "personal" },
+      { src: "images/AnimeSky.png", title: "Starry Night", category: "personal" },
+      { src: "images/CaptainMarvel.png", title: "Captain Marvel", category: "personal" },
+
+      { src: "images/Feral.png", title: "Feral", category: "game", desc: "Character art for senior capstone" },
+      { src: "images/BloatedCorpse.png", title: "Bloated Corpse", category: "game", desc: "Quick portrait for capstone" },
+
+      { title: "Winged Horror", thumb: "images/wingedhorror.png", category: "game", desc: "Creature for capstone",
         frames: [
           { src: "images/wingedhorror-line.png", label: "Lineart" },
           { src: "images/wingedhorror-wip.png",  label: "In-progress" },
@@ -181,7 +192,7 @@
         ]
       },
 
-      { title: "Sylvia", thumb: "images/sylvia.png",
+      { title: "Sylvia", thumb: "images/sylvia.png", category: "game",
         frames: [
           { src: "images/sylvia-line.png", label: "Lineart" },
           { src: "images/sylvia-wip.png",  label: "In-progress" },
@@ -189,14 +200,14 @@
         ]
       },
 
-      { title: "Sylvia", thumb: "images/sylvia-full.png",
+      { title: "Sylvia (Full)", thumb: "images/sylvia-full.png", category: "game",
         frames: [
           { src: "images/sylvia-full.png", label: "Final" },
-          { src: "images/sylviafullbody.gif",  label: "gif version" },
+          { src: "images/sylviafullbody.gif", label: "GIF" }
         ]
       },
 
-      { title: "Stryker's Revenge Logo", thumb: "images/Logo-4.png",
+      { title: "Stryker's Revenge Logo", thumb: "images/Logo-4.png", category: "game",
         frames: [
           { src: "images/Logo-0.png", label: "Sketch" },
           { src: "images/Logo-1.png", label: "Lettering" },
@@ -206,22 +217,22 @@
         ]
       },
 
-      { title: "Amelia", thumb: "images/Amelia.png",
+      { title: "Amelia", thumb: "images/Amelia.png", category: "game",
         frames: [
           { src: "images/Amelia-wip.png", label: "In-progress" },
           { src: "images/Amelia.png",     label: "Final" },
-		  { src: "images/Amelia_2.gif",     label: "gif version" }
-        ]
-      },
-	  
-	  { title: "Callus", thumb: "images/Callus.png",
-        frames: [
-          { src: "images/Callus.png", 		label: "Callus" },
-          { src: "images/CallusGIF.gif",    label: "Callus gif", desc: "Animation I made for my senior capstone game." }
+          { src: "images/Amelia_2.gif",   label: "GIF" }
         ]
       },
 
-      { title: "Guard", thumb: "images/Guard1.jpg",
+      { title: "Callus", thumb: "images/Callus.png", category: "game",
+        frames: [
+          { src: "images/Callus.png",      label: "Callus" },
+          { src: "images/CallusGIF.gif",   label: "Callus GIF", desc: "Animation for capstone game" }
+        ]
+      },
+
+      { title: "Guard", thumb: "images/Guard1.jpg", category: "game",
         frames: [
           { src: "images/Guard-line.png", label: "Lineart" },
           { src: "images/Guard-wip.png",  label: "In-progress" },
@@ -229,28 +240,30 @@
         ]
       },
 
-      { title: "Stryker", thumb: "images/Stryker.png",
+      { title: "Stryker", thumb: "images/Stryker.png", category: "game",
         frames: [
           { src: "images/Stryker-line.png", label: "Lineart" },
           { src: "images/Stryker.png",      label: "Final" }
         ]
       },
 
-      { title: "Fictional Company Logo", thumb: "images/CompanyLogo1.png",
+      { title: "Fictional Company Logo", thumb: "images/CompanyLogo1.png", category: "game",
         frames: [
-          { src: "images/CompanyLogo1.png", label: "Company Logo", desc: "Logo I made for the fictional company my team created for my Senior Capstone course." },
+          { src: "images/CompanyLogo1.png", label: "Company Logo", desc: "Logo for a fictional company (capstone team)" },
           { src: "images/CompanyLogo.png",  label: "Company Logo" }
         ]
       },
     ];
 
-    // --- RENDER GRID
+    // === 2) RENDER GRID + intersection observer for reveal
     const grid = document.getElementById('grid');
     const frag = document.createDocumentFragment();
 
     items.forEach((it, i) => {
       const tile = document.createElement('figure');
       tile.className = 'tile';
+      tile.dataset.category = it.category || 'personal';
+
       const btn = document.createElement('button');
       btn.setAttribute('aria-label', `Open image ${i+1}`);
 
@@ -266,7 +279,13 @@
 
       const cap = document.createElement('figcaption');
       cap.className = 'cap';
-      cap.textContent = it.title || '';
+      const left = document.createElement('span');
+      left.textContent = it.title || '';
+      const right = document.createElement('span');
+      right.textContent = it.category ? it.category[0].toUpperCase()+it.category.slice(1) : '';
+      right.style.opacity = .6;
+      cap.appendChild(left);
+      cap.appendChild(right);
 
       tile.appendChild(btn);
       if (it.title) tile.appendChild(cap);
@@ -274,14 +293,49 @@
     });
     grid.appendChild(frag);
 
-    // --- LIGHTBOX WITH PROCESS STEPS + DESCRIPTIONS
-    const lb     = document.getElementById('lightbox');
-    const lbImg  = document.getElementById('lb-img');
-    const lbCap  = document.getElementById('lb-cap');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if (e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:"0px 0px -10% 0px", threshold: .1});
+    document.querySelectorAll('.tile').forEach(t=>io.observe(t));
+
+    // === 3) FILTERS + underline slide
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const underline = document.getElementById('filterUnderline');
+    function moveUnderline(btn){
+      const rect = btn.getBoundingClientRect();
+      const parent = btn.parentElement.getBoundingClientRect();
+      const left = rect.left - parent.left + 18; // padding compensation
+      underline.style.left = left + 'px';
+      underline.style.width = rect.width + 'px';
+    }
+    function applyFilter(kind){
+      document.querySelector('.filter-btn[aria-pressed="true"]')?.setAttribute('aria-pressed','false');
+      const active = document.querySelector(`.filter-btn[data-filter="${kind}"]`);
+      active?.setAttribute('aria-pressed','true');
+      if (active) moveUnderline(active);
+
+      const tiles = document.querySelectorAll('.tile');
+      tiles.forEach(t=>{
+        const cat = t.dataset.category || 'personal';
+        const show = (kind==='all') || (cat===kind);
+        if (show) t.classList.remove('hidden'); else t.classList.add('hidden');
+      });
+    }
+    filterButtons.forEach(b => b.addEventListener('click', ()=>applyFilter(b.dataset.filter)));
+    // init underline on first paint
+    requestAnimationFrame(()=>{ const first = document.querySelector('.filter-btn[aria-pressed="true"]'); if (first) moveUnderline(first); });
+    applyFilter('all');
+
+    // === 4) LIGHTBOX
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCap = document.getElementById('lb-cap');
     const lbDesc = document.getElementById('lb-desc');
     const closeBtn = document.querySelector('.lb-close');
-    const prevBtn  = document.getElementById('prev');
-    const nextBtn  = document.getElementById('next');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
 
     let index = 0, frameIndex = 0, slideshowTimer = null;
     const FRAME_INTERVAL_MS = 1600;
@@ -289,7 +343,6 @@
     function showFrame() {
       const it = items[index];
       let imgSrc = "", altText = "", stepsText = "", labelText = "", descText = "";
-
       if (it.frames && it.frames.length) {
         const f = it.frames[frameIndex];
         imgSrc = f.src;
@@ -302,11 +355,9 @@
         altText = it.title || 'Artwork';
         descText = it.desc || "";
       }
-
       lbImg.src = imgSrc;
       lbImg.alt = altText;
       lbCap.textContent = `${it.title || ''}${it.title ? ' — ' : ''}${stepsText}${labelText}`;
-
       if (descText) { lbDesc.textContent = descText; lbDesc.hidden = false; }
       else { lbDesc.textContent = ""; lbDesc.hidden = true; }
     }
@@ -332,31 +383,34 @@
     }
 
     function clearSlideshow(){ if (slideshowTimer){ clearInterval(slideshowTimer); slideshowTimer = null; } }
-
     function openLightbox(i){ index=i; frameIndex=0; startSlideshowIfAny(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
     function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow=''; clearSlideshow(); lbDesc.textContent=""; lbDesc.hidden=true; }
     function prevArtwork(){ clearSlideshow(); index=(index-1+items.length)%items.length; frameIndex=0; startSlideshowIfAny(); }
     function nextArtwork(){ clearSlideshow(); index=(index+1)%items.length; frameIndex=0; startSlideshowIfAny(); }
 
     closeBtn.addEventListener('click', closeLightbox);
-    prevBtn.addEventListener('click', () => { if (lb.classList.contains('open')) prevArtwork(); });
-    nextBtn.addEventListener('click', () => { if (lb.classList.contains('open')) nextArtwork(); });
-
+    prevBtn?.addEventListener('click', () => { if (lb.classList.contains('open')) prevArtwork(); });
+    nextBtn?.addEventListener('click', () => { if (lb.classList.contains('open')) nextArtwork(); });
     document.getElementById('lb-img').addEventListener('click', () => {
       const it = items[index];
       if (it.frames && it.frames.length > 1) { clearSlideshow(); frameIndex = (frameIndex + 1) % it.frames.length; showFrame(); }
     });
-
     document.addEventListener('keydown', (e) => {
       if (!lb.classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft')  prevArtwork();
       if (e.key === 'ArrowRight') nextArtwork();
     });
-
     lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
 
+    // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reposition underline on resize
+    window.addEventListener('resize', ()=>{
+      const active = document.querySelector('.filter-btn[aria-pressed="true"]');
+      if (active) moveUnderline(active);
+    });
   </script>
 </body>
 </html>

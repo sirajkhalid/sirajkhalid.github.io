@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — Siraj Khalid, Concept Artist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ --bg:#0b0b0b; --fg:#eaeaea; --muted:#b9b9b9; --line:rgba(234,234,234,.12); --maxw:1000px; }
+    *{box-sizing:border-box}
+    body{
+      margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+      opacity:0; transition:opacity .35s ease; /* page fade-in */
+    }
+    body.ready{opacity:1}
+    a{color:var(--fg);text-decoration:none;border-bottom:1px dotted rgba(234,234,234,.35)}
+
+    header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--line)}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:16px 18px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand h1{margin:0;font-weight:800;letter-spacing:.02em;font-size:22px}
+    .role{color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;display:block}
+    .navlinks{display:flex;align-items:center;gap:10px}
+    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:var(--fg);transition:transform .15s ease, background .2s ease}
+    .chip:hover{background:rgba(255,255,255,.12); transform:translateY(-1px) scale(1.02)}
+
+    main{max-width:var(--maxw);margin:26px auto;padding:0 18px 50px}
+    .hero{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
+    @media(min-width:860px){ .hero{grid-template-columns:360px 1fr} }
+
+    /* Photo card (6) hover spotlight; resized + safe bounds */
+    .me{
+      position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);
+      transition:transform .3s ease, filter .3s ease;
+      width:100%; max-width:360px; /* cap width so the large PNG doesn’t overwhelm */
+    }
+    .me img{display:block;width:100%;height:auto;filter:grayscale(.2);transform:scale(1.0);transition:transform .3s ease, filter .3s ease}
+    .me:hover img{filter:grayscale(0);transform:scale(1.02)}
+    .me:after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:radial-gradient(1200px 400px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.06), transparent 60%);
+      transition:opacity .2s ease; opacity:.0;
+    }
+    .me:hover:after{opacity:1}
+    .me-caption{font-size:12px;color:var(--muted);margin-top:6px}
+
+    h2{font-size:16px;text-transform:uppercase;letter-spacing:.14em;margin:26px 0 10px;color:#dcdcdc;border-top:1px solid var(--line);padding-top:14px}
+    .cols{display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:860px){ .cols{grid-template-columns:1fr 1fr} }
+    ul{margin:10px 0 0 18px}
+    li{margin:6px 0}
+
+    footer{max-width:var(--maxw);margin:10px auto 50px;padding:0 18px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <div class="brand">
+        <h1>Siraj Khalid</h1>
+        <span class="role">Concept Artist</span>
+      </div>
+      <nav class="navlinks">
+        <a class="chip" href="/">Home</a>
+        <a class="chip" href="/resume.html">Resume</a>
+        <a class="chip" href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <figure class="me" id="meCard">
+        <img src="images/me.png" alt="Photo of Siraj" width="360" height="465" />
+      </figure>
+      <div>
+        <h2>About Me</h2>
+        <p>I’m Siraj Khalid, a concept artist focused on characters, portraits, and creatures. I bring a disciplined, technical mindset from my prior career in data analytics and military service, and I care about clean silhouettes, readable values, and mood-driven lighting.</p>
+        <p><strong>Background:</strong> Air Force veteran (2011–2015). B.S. in Information Technology from George Mason University (2018). Worked at Accenture (2019–2023) in data analytics/science. Now pivoting into video game design—merging art fundamentals with solid, production-friendly workflows.</p>
+      </div>
+    </section>
+
+    <section class="cols">
+      <div>
+        <h2>Skills</h2>
+        <ul>
+          <li>Character & creature concept design</li>
+          <li>Portrait painting & material separation</li>
+          <li>Value grouping, edge control, and lighting</li>
+          <li>Presentation, iteration speed, and feedback</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Software</h2>
+        <ul>
+          <li>Photoshop / Procreate</li>
+          <li>3ds Max</li>
+          <li>Unity · Unreal Engine</li>
+          <li>Git / GitHub</li>
+          <li>Power BI · Python · SQL</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Professional Snapshot</h2>
+      <ul>
+        <li>Air Force Veteran — inspections and engineering support (discipline, teamwork)</li>
+        <li>Accenture — analytics & automation; delivered client-facing tools and insights</li>
+        <li>Game Design — capstone creature/character work; pipeline-aware and organized</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> Siraj Khalid — <a href="/">Back to Home</a></div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>document.body.classList.add('ready'));
+    // Hover spotlight follows cursor over headshot
+    const me = document.getElementById('meCard');
+    me?.addEventListener('pointermove', (e)=>{
+      const rect = me.getBoundingClientRect();
+      const x = ((e.clientX - rect.left)/rect.width)*100;
+      const y = ((e.clientY - rect.top)/rect.height)*100;
+      me.style.setProperty('--mx', x+'%');
+      me.style.setProperty('--my', y+'%');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
