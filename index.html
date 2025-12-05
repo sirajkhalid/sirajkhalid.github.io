@@ -271,7 +271,6 @@
       list.forEach((it, i)=>{
         const tile = renderTile(it, i);
         frag.appendChild(tile);
-        // defer observe until in DOM
         requestAnimationFrame(()=>observeReveal(tile));
       });
       grid.appendChild(frag);
@@ -375,10 +374,21 @@
     document.querySelector('.lb-close').addEventListener('click', closeLightbox);
     prevBtn.addEventListener('click', () => { if (lb.classList.contains('open')) prevArtwork(); });
     nextBtn.addEventListener('click', () => { if (lb.classList.contains('open')) nextArtwork(); });
-    document.getElementById('lb-img').addEventListener('click', () => {
+
+    function advanceOnClick() {
       const it = currentList[index];
-      if (it.frames && it.frames.length > 1) { clearSlideshow(); frameIndex = (frameIndex + 1) % it.frames.length; showFrame(); }
-    });
+      clearSlideshow(); // keep clicks snappy
+
+      if (it.frames && it.frames.length > 0 && frameIndex < it.frames.length - 1) {
+        frameIndex++;
+        showFrame();
+      } else {
+        // no frames OR last frame → go to next artwork
+        nextArtwork(); // resets frameIndex and restarts slideshow if needed
+      }
+    }
+    document.getElementById('lb-img').addEventListener('click', advanceOnClick);
+
     document.addEventListener('keydown', (e) => {
       if (!lb.classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
