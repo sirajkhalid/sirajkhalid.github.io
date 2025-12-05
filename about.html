@@ -10,10 +10,7 @@
   <style>
     :root{ --bg:#0b0b0b; --fg:#eaeaea; --muted:#b9b9b9; --line:rgba(234,234,234,.12); --maxw:1000px; }
     *{box-sizing:border-box}
-    body{
-      margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
-      opacity:0; transition:opacity .35s ease; /* page fade-in */
-    }
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;opacity:0;transition:opacity .35s ease}
     body.ready{opacity:1}
     a{color:var(--fg);text-decoration:none;border-bottom:1px dotted rgba(234,234,234,.35)}
 
@@ -23,28 +20,27 @@
     .brand h1{margin:0;font-weight:800;letter-spacing:.02em;font-size:22px}
     .role{color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;display:block}
     .navlinks{display:flex;align-items:center;gap:10px}
-    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:var(--fg);transition:transform .15s ease, background .2s ease}
+    .chip,.icon{transition:transform .15s ease, background .2s ease}
+    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:var(--fg)}
     .chip:hover{background:rgba(255,255,255,.12); transform:translateY(-1px) scale(1.02)}
+    .icon{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;text-decoration:none;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18)}
+    .icon:hover{background:rgba(255,255,255,0.12); transform:translateY(-1px) scale(1.02)}
+    .icon svg{width:18px;height:18px;fill:var(--fg)}
 
     main{max-width:var(--maxw);margin:26px auto;padding:0 18px 50px}
     .hero{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
     @media(min-width:860px){ .hero{grid-template-columns:360px 1fr} }
 
-    /* Photo card (6) hover spotlight; resized + safe bounds */
-    .me{
-      position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);
-      transition:transform .3s ease, filter .3s ease;
-      width:100%; max-width:360px; /* cap width so the large PNG doesn’t overwhelm */
-    }
+    /* Photo card: NO BORDER; resized + hover spotlight */
+    .me{position:relative;border-radius:16px;overflow:hidden;width:100%;max-width:360px}
     .me img{display:block;width:100%;height:auto;filter:grayscale(.2);transform:scale(1.0);transition:transform .3s ease, filter .3s ease}
     .me:hover img{filter:grayscale(0);transform:scale(1.02)}
     .me:after{
       content:""; position:absolute; inset:0; pointer-events:none;
       background:radial-gradient(1200px 400px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.06), transparent 60%);
-      transition:opacity .2s ease; opacity:.0;
+      transition:opacity .2s ease; opacity:0;
     }
     .me:hover:after{opacity:1}
-    .me-caption{font-size:12px;color:var(--muted);margin-top:6px}
 
     h2{font-size:16px;text-transform:uppercase;letter-spacing:.14em;margin:26px 0 10px;color:#dcdcdc;border-top:1px solid var(--line);padding-top:14px}
     .cols{display:grid;grid-template-columns:1fr;gap:18px}
@@ -62,10 +58,16 @@
         <h1>Siraj Khalid</h1>
         <span class="role">Concept Artist</span>
       </div>
-      <nav class="navlinks">
+      <nav class="navlinks" aria-label="Primary">
         <a class="chip" href="/">Home</a>
         <a class="chip" href="/resume.html">Resume</a>
         <a class="chip" href="/contact.html">Contact</a>
+        <a class="icon" href="https://www.artstation.com/taytayswiftt" target="_blank" rel="noopener" aria-label="ArtStation">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 14H4z"/></svg>
+        </a>
+        <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19Z"/></svg>
+        </a>
       </nav>
     </div>
   </header>
@@ -77,8 +79,8 @@
       </figure>
       <div>
         <h2>About Me</h2>
-        <p>I’m Siraj Khalid, a concept artist focused on characters, portraits, and creatures. I bring a disciplined, technical mindset from my prior career in data analytics and military service, and I care about clean silhouettes, readable values, and mood-driven lighting.</p>
-        <p><strong>Background:</strong> Air Force veteran (2011–2015). B.S. in Information Technology from George Mason University (2018). Worked at Accenture (2019–2023) in data analytics/science. Now pivoting into video game design—merging art fundamentals with solid, production-friendly workflows.</p>
+        <p>I’m <strong>Siraj Khalid</strong>, a concept artist focused on characters, portraits, and creatures. I bring a disciplined, technical mindset from my prior career in data analytics and military service, and I care about clean silhouettes, readable values, and mood-driven lighting.</p>
+        <p><strong>Background:</strong> Air Force veteran (2011–2015). B.S. in Information Technology from George Mason University (2018). Worked at Accenture (2019–2023) in data analytics/science. Now pivoting into video game design—merging art fundamentals with production-friendly workflows.</p>
       </div>
     </section>
 
@@ -107,9 +109,9 @@
     <section>
       <h2>Professional Snapshot</h2>
       <ul>
-        <li>Air Force Veteran — inspections and engineering support (discipline, teamwork)</li>
-        <li>Accenture — analytics & automation; delivered client-facing tools and insights</li>
-        <li>Game Design — capstone creature/character work; pipeline-aware and organized</li>
+        <li>Air Force Veteran — inspections & engineering support</li>
+        <li>Accenture — analytics & automation; client-facing tools & insights</li>
+        <li>Game Design — capstone character/creature work; pipeline-aware</li>
       </ul>
     </section>
   </main>
@@ -120,14 +122,12 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', ()=>document.body.classList.add('ready'));
-    // Hover spotlight follows cursor over headshot
+    // Follow-cursor spotlight on headshot
     const me = document.getElementById('meCard');
     me?.addEventListener('pointermove', (e)=>{
-      const rect = me.getBoundingClientRect();
-      const x = ((e.clientX - rect.left)/rect.width)*100;
-      const y = ((e.clientY - rect.top)/rect.height)*100;
-      me.style.setProperty('--mx', x+'%');
-      me.style.setProperty('--my', y+'%');
+      const r = me.getBoundingClientRect();
+      me.style.setProperty('--mx', ((e.clientX - r.left)/r.width)*100 + '%');
+      me.style.setProperty('--my', ((e.clientY - r.top)/r.height)*100 + '%');
     });
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>

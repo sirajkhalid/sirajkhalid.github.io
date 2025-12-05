@@ -13,14 +13,21 @@
     body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;opacity:0;transition:opacity .35s ease}
     body.ready{opacity:1}
     a{color:var(--fg);text-decoration:none;border-bottom:1px dotted rgba(234,234,234,.35)}
+
     header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--line)}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:16px 18px}
     .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand h1{margin:0;font-weight:800;letter-spacing:.02em;font-size:22px}
     .role{color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;display:block}
+
     .navlinks{display:flex;align-items:center;gap:10px}
-    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:var(--fg);transition:transform .15s ease, background .2s ease}
+    .chip,.icon{transition:transform .15s ease, background .2s ease}
+    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:var(--fg)}
     .chip:hover{background:rgba(255,255,255,.12); transform:translateY(-1px) scale(1.02)}
+    .icon{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;text-decoration:none;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18)}
+    .icon:hover{background:rgba(255,255,255,0.12); transform:translateY(-1px) scale(1.02)}
+    .icon svg{width:18px;height:18px;fill:var(--fg)}
+
     main{max-width:var(--maxw);margin:26px auto;padding:0 18px 50px}
     .card{border:1px solid var(--line);border-radius:14px;padding:18px;background:#111}
     .row{display:grid;grid-template-columns:1fr;gap:12px}
@@ -29,6 +36,7 @@
     .muted{color:var(--muted)}
     .btn{display:inline-block;margin-top:12px;padding:10px 14px;border:1px solid rgba(255,255,255,.2);border-radius:10px;background:rgba(255,255,255,.06);color:var(--fg);text-decoration:none;transition:transform .15s ease, background .2s ease}
     .btn:hover{background:rgba(255,255,255,.12); transform:translateY(-1px) scale(1.02)}
+
     footer{max-width:var(--maxw);margin:10px auto 50px;padding:0 18px;color:var(--muted);font-size:13px}
   </style>
 </head>
@@ -39,10 +47,16 @@
         <h1>Siraj Khalid</h1>
         <span class="role">Concept Artist</span>
       </div>
-      <nav class="navlinks">
+      <nav class="navlinks" aria-label="Primary">
         <a class="chip" href="/">Home</a>
         <a class="chip" href="/about.html">About</a>
         <a class="chip" href="/resume.html">Resume</a>
+        <a class="icon" href="https://www.artstation.com/taytayswiftt" target="_blank" rel="noopener" aria-label="ArtStation">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 14H4z"/></svg>
+        </a>
+        <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19Z"/></svg>
+        </a>
       </nav>
     </div>
   </header>
