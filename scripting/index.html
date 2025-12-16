@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scripting — Siraj Khalid</title>
+  <meta name="description" content="Game systems and scripting projects by Siraj Khalid." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0b; --fg:#eaeaea; --muted:#9b9b9b; --line:rgba(234,234,234,0.12);
+      --maxw:1400px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;background:var(--bg);color:var(--fg);
+      font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+      opacity:0;transition:opacity .35s ease;
+    }
+    body.ready{opacity:1}
+
+    /* Header */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(150%) blur(8px);
+      background:rgba(11,11,11,0.6);
+      border-bottom:1px solid var(--line)
+    }
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:12px 18px}
+    .header-row{display:flex;justify-content:space-between;align-items:center}
+    .brand h1{margin:0;font-size:22px;font-weight:800}
+    .brand .role{font-size:12px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+
+    nav{display:flex;gap:10px}
+    .chip{
+      padding:8px 12px;border-radius:999px;
+      text-decoration:none;color:var(--fg);
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.18);
+      transition:.2s
+    }
+    .chip:hover{background:rgba(255,255,255,0.12)}
+    .chip[aria-current="page"]{background:rgba(255,255,255,0.12)}
+
+    /* Page */
+    main{max-width:var(--maxw);margin:30px auto;padding:0 18px}
+    h2{margin-bottom:6px}
+    p.muted{color:var(--muted);margin-bottom:24px}
+
+    /* Game Grid */
+    .game-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:28px;
+    }
+
+    .game-card{
+      position:relative;
+      aspect-ratio:1/1;
+      border-radius:18px;
+      overflow:hidden;
+      background:#111;
+      border:1px solid var(--line);
+      cursor:pointer;
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+
+    .game-card:hover{
+      transform:scale(1.06);
+      box-shadow:0 20px 40px rgba(0,0,0,.6);
+    }
+
+    .game-card img{
+      width:100%;height:100%;
+      object-fit:cover;
+      opacity:.85;
+    }
+
+    .overlay{
+      position:absolute;inset:0;
+      display:flex;flex-direction:column;
+      justify-content:flex-end;
+      padding:16px;
+      background:linear-gradient(to top, rgba(0,0,0,.7), transparent 60%);
+    }
+
+    .overlay h3{margin:0;font-size:18px}
+    .overlay p{margin:6px 0 0;font-size:13px;color:var(--muted)}
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin:60px 0 40px;
+    }
+  </style>
+</head>
+
+<body>
+<header class="topbar">
+  <div class="wrap header-row">
+    <div class="brand">
+      <h1>Siraj Khalid</h1>
+      <span class="role">Concept Artist</span>
+    </div>
+    <nav>
+      <a class="chip" href="/">Home</a>
+      <a class="chip" href="/about.html">About</a>
+      <a class="chip" href="/resume.html">Resume</a>
+      <a class="chip" href="/contact.html">Contact</a>
+      <a class="chip" href="/scripting/" aria-current="page">Game</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h2>Game Systems & Scripting</h2>
+  <p class="muted">Playable builds and system-focused game projects.</p>
+
+  <div class="game-grid">
+
+    <!-- Stryker's Revenge -->
+    <a class="game-card" href="/scripting/strykersrevenge/">
+      <img src="/images/strykersrevenge-square.jpg" alt="Stryker's Revenge">
+      <div class="overlay">
+        <h3>Stryker’s Revenge — Vertical Slice</h3>
+        <p>Senior design vertical slice with fully custom gameplay and UI systems.</p>
+      </div>
+    </a>
+
+    <!-- Pokémon -->
+    <a class="game-card" href="/scripting/pokemon/">
+      <img src="/images/pokemon-battle-square.jpg" alt="Pokémon Battle System">
+      <div class="overlay">
+        <h3>Pokémon Battle System</h3>
+        <p>Personal project recreating Pokémon’s turn-based combat mechanics.</p>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  © <span id="year"></span> Siraj Khalid
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.body.classList.add('ready');
+    document.getElementById('year').textContent=new Date().getFullYear();
+  });
+</script>
+</body>
+</html>
