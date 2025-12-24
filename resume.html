@@ -4,76 +4,245 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Siraj Khalid — Resume</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
-  <style>
-    :root{ --bg:#0b0b0b; --fg:#eaeaea; --muted:#b9b9b9; --line:rgba(234,234,234,.12); --maxw:920px; }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;opacity:0;transition:opacity .35s ease}
-    body.ready{opacity:1}
-    a{color:var(--fg);text-decoration:none;border-bottom:1px dotted rgba(234,234,234,.35)}
 
-    header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--line)}
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:16px 18px}
-    .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:flex-start;gap:12px}
-    h1{font-size:22px;margin:0;font-weight:800;letter-spacing:.02em}
-    .role{color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;display:block}
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --fg:#eaeaea;
+      --muted:#b9b9b9;
+      --line:rgba(234,234,234,.12);
+      --maxw:920px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--fg);
+      font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+      opacity:0;
+      transition:opacity .35s ease;
+    }
+
+    body.ready{opacity:1}
+
+    a{
+      color:var(--fg);
+      text-decoration:none;
+      border-bottom:1px dotted rgba(234,234,234,.35);
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      backdrop-filter:blur(8px);
+      background:rgba(11,11,11,.6);
+      border-bottom:1px solid var(--line);
+      z-index:10;
+    }
+
+    .wrap{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:16px 18px;
+    }
+
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    h1{
+      font-size:22px;
+      margin:0;
+      font-weight:800;
+      letter-spacing:.02em;
+    }
+
+    .role{
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-top:3px;
+      display:block;
+    }
+
     .muted{color:var(--muted)}
 
-    .navlinks{display:flex;align-items:center;gap:10px}
-    .chip,.icon{transition:transform .15s ease, background .2s ease}
-    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:var(--fg)}
-    .chip:hover{background:rgba(255,255,255,.12); transform:translateY(-1px) scale(1.02)}
-    .icon{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;text-decoration:none;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18)}
-    .icon:hover{background:rgba(255,255,255,0.12); transform:translateY(-1px) scale(1.02)}
-    .icon svg{width:18px;height:18px;fill:var(--fg)}
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
 
-    main{max-width:var(--maxw);margin:26px auto;padding:0 18px 40px}
-    h2{font-size:14px;text-transform:uppercase;letter-spacing:.14em;margin:32px 0 10px;color:#dcdcdc}
-    section{border-top:1px solid var(--line);padding-top:16px}
-    .job{margin:16px 0}
-    .job h3{margin:0 0 4px 0;font-size:16px}
-    .meta{font-size:13px;color:var(--muted)}
-    ul{margin:8px 0 0 18px}
-    li{margin:6px 0}
-    footer{max-width:var(--maxw);margin:10px auto 50px;padding:0 18px;color:var(--muted);font-size:13px}
+    .chip,.icon{
+      transition:transform .15s ease, background .2s ease;
+    }
+
+    .chip{
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.18);
+    }
+
+    .chip:hover{
+      background:rgba(255,255,255,.12);
+      transform:translateY(-1px);
+    }
+
+    .icon{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.18);
+    }
+
+    .icon:hover{
+      background:rgba(255,255,255,.12);
+      transform:translateY(-1px);
+    }
+
+    .icon svg{
+      width:18px;
+      height:18px;
+      fill:var(--fg);
+    }
+
+    /* Main */
+    main{
+      max-width:var(--maxw);
+      margin:26px auto;
+      padding:0 18px 40px;
+    }
+
+    /* Resume header block */
+    .resume-header{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:18px;
+    }
+
+    .download-pdf{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:13px;
+      transition:background .2s ease, transform .15s ease;
+    }
+
+    .download-pdf:hover{
+      background:rgba(255,255,255,.12);
+      transform:translateY(-1px);
+    }
+
+    .download-pdf svg{
+      width:16px;
+      height:16px;
+      fill:var(--fg);
+    }
+
+    h2{
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      margin:32px 0 10px;
+      color:#dcdcdc;
+    }
+
+    section{
+      border-top:1px solid var(--line);
+      padding-top:16px;
+    }
+
+    .job{
+      margin:16px 0;
+    }
+
+    .job h3{
+      margin:0 0 4px 0;
+      font-size:16px;
+    }
+
+    .meta{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    ul{
+      margin:8px 0 0 18px;
+    }
+
+    li{
+      margin:6px 0;
+    }
+
+    footer{
+      max-width:var(--maxw);
+      margin:10px auto 50px;
+      padding:0 18px;
+      color:var(--muted);
+      font-size:13px;
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="wrap top">
-      <div class="brand">
-        <div>
-          <h1>Siraj Khalid</h1>
-          <span class="role">Concept Artist</span>
-          <div class="muted">Arlington, VA · <a href="tel:+17038538031">703-853-8031</a> · <a href="mailto:sirajkhalid@live.com">sirajkhalid@live.com</a></div>
-        </div>
+<header>
+  <div class="wrap top">
+    <div>
+      <h1>Siraj Khalid</h1>
+      <span class="role">Concept Artist</span>
+      <div class="muted">
+        Arlington, VA · <a href="tel:+17038538031">703-853-8031</a> ·
+        <a href="mailto:sirajkhalid@live.com">sirajkhalid@live.com</a>
       </div>
-
-      <nav class="navlinks" aria-label="Top links">
-        <a class="chip" href="/">Home</a>
-        <a class="chip" href="/about.html">About</a>
-		<a class="chip" href="/resume.html" aria-current="page">Resume</a>
-        <a class="chip" href="/contact.html">Contact</a>
-		<a class="chip" href="/scripting">Game</a>
-        <a class="chip" href="/resume.pdf" download>Download PDF</a>
-        <a class="icon" href="https://www.artstation.com/taytayswiftt" target="_blank" rel="noopener" aria-label="ArtStation">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 14H4z"/></svg>
-        </a>
-        <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19Z"/></svg>
-        </a>
-      </nav>
     </div>
-  </header>
 
-  <main>
-    <section>
-      <h2>Links</h2>
-      <div><a href="https://sirajkhalid.com" target="_blank" rel="noopener">sirajkhalid.com</a> · <a href="https://www.linkedin.com/in/sirajkhalid/" target="_blank" rel="noopener">linkedin.com/in/sirajkhalid</a></div>
-    </section>
+    <nav class="navlinks">
+      <a class="chip" href="/">Home</a>
+      <a class="chip" href="/about.html">About</a>
+      <a class="chip" href="/resume.html" aria-current="page">Resume</a>
+      <a class="chip" href="/contact.html">Contact</a>
+      <a class="chip" href="/scripting">Games</a>
+      <a class="icon" href="https://www.artstation.com/taytayswiftt" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 4l8 14H4z"/></svg>
+      </a>
+      <a class="icon" href="https://www.linkedin.com/in/sirajkhalid/" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5Zm-9.79 16H6.2V10.2h3.01V19ZM7.7 8.97a1.74 1.74 0 1 1 0-3.49 1.74 1.74 0 0 1 0 3.49ZM19 19h-3v-4.49c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.72 1.16-1.72 2.37V19Z"/></svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Resume title + download -->
+  <div class="resume-header">
+    <h2 style="margin:0">Resume</h2>
+    <a class="download-pdf" href="/resume.pdf" download>
+      <svg viewBox="0 0 24 24"><path d="M12 16l4-5h-3V4h-2v7H8l4 5Zm8 2H4v2h16v-2Z"/></svg>
+      Download PDF
+    </a>
+  </div>
 
     <section>
       <h2>Experience</h2>
