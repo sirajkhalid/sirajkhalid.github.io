@@ -105,9 +105,10 @@
 
     <!-- Filters -->
     <div class="filters">
-      <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter-btn" data-filter="game">Game Work</button>
-      <button class="filter-btn" data-filter="personal">Personal Work</button>
+		<button class="filter-btn" data-filter="all">All</button>
+		<button class="filter-btn" data-filter="game">Game Work</button>
+		<button class="filter-btn" data-filter="personal">Personal Work</button>
+
       <span class="filter-spacer"></span>
       <div class="filter-underline" id="filterUnderline"></div>
     </div>
@@ -315,6 +316,17 @@
       underline.style.width = rect.width + 'px';
     }
 
+	function getInitialFilter() {
+	  // If already visited index.html in this session, show all
+	  if (sessionStorage.getItem('visitedIndex')) {
+		return 'all';
+	  }
+
+	  // First visit only
+	  sessionStorage.setItem('visitedIndex', 'true');
+	  return 'game';
+	}
+
     function applyFilter(kind){
       document.querySelector('.filter-btn[aria-pressed="true"]')?.setAttribute('aria-pressed','false');
       const active = document.querySelector(`.filter-btn[data-filter="${kind}"]`);
@@ -327,7 +339,7 @@
 
     filterButtons.forEach(b => b.addEventListener('click', ()=>applyFilter(b.dataset.filter)));
     requestAnimationFrame(()=>{ const first = document.querySelector('.filter-btn[aria-pressed="true"]'); if (first) moveUnderline(first); });
-    applyFilter('all');
+    applyFilter(getInitialFilter());
 
     // reposition underline on resize
     window.addEventListener('resize', ()=>{
